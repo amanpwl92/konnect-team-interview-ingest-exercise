@@ -1,0 +1,30 @@
+{
+  "type": "record",
+  "name": "CdcEventValue",
+  "fields": [
+    {"name": "type", "type": "int"},
+    {
+      "name": "object",
+      "type": {
+        "type": "record",
+        "name": "ObjectData",
+        "fields": [
+          {"name": "id", "type": "string"},
+          {"name": "host", "type": ["null", "string"], "default": null},
+          {"name": "name", "type": ["null", "string"], "default": null},
+          {"name": "path", "type": ["null", "string"], "default": null},
+          {"name": "port", "type": ["null", "int"], "default": null},
+          {"name": "tags", "type": {"type": "array", "items": "string"}},
+          {"name": "enabled", "type": "boolean"},
+          {"name": "retries", "type": "int"},
+          {"name": "protocol", "type": "string"},
+          {"name": "created_at", "type": "long"},
+          {"name": "updated_at", "type": "long"},
+          {"name": "read_timeout", "type": "int"},
+          {"name": "write_timeout", "type": "int"},
+          {"name": "connect_timeout", "type": "int"}
+        ]
+      }
+    }
+  ]
+}
