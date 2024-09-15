@@ -6,10 +6,11 @@
 4. failure handling during message producing/consuming.
 5. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
 in kafka or multiple topics for each type on konnect entity.
-6. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
-7. logging in app
-8. any monitoring to see lags or any other metric ?
-9. add unit test cases too.
+6. which fields to be indexed in open search schema ?
+7. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
+8. logging in app
+9. any monitoring to see lags or any other metric ?
+10. add unit test cases too.
 
 
 # Understanding sample events schema and pattern
