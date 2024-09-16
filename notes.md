@@ -45,6 +45,8 @@ last is cluster id. The events are for create and update both for a cluster. Ex 
 15. 5 event for consumer_group
 16. 8 events for consumer
 
+Events to be considered count = 15+554+14 = 583
+
 # some working curls for opensearch
 
 ```

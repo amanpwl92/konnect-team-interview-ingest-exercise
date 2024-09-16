@@ -162,8 +162,12 @@ public class IngestExerciseProducer {
           } else if (eventType.equals("route")) {
             event = mapper.readValue(eventValue, RouteEvent.class);
           }
+
+          if(event == null) {
+            continue;
+          }
           event.setKonnectEntity(eventType);
-          producerApp.produce(event.getId(), event);
+          producerApp.produce(eventType + ":" + event.getId(), event);
         } catch (Exception ex) {
           System.err.printf("Event not mapped to object");
         }

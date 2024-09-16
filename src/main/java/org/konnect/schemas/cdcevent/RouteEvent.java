@@ -9,9 +9,6 @@ public class RouteEvent extends BaseEvent {
   private String name;
 
   private List<String> paths;
-  @JsonProperty("service_id")
-  private String serviceId;
-  private List<String> methods;
   private boolean enabled;
   @JsonProperty("created_at")
   private long createdAt;
@@ -45,6 +42,14 @@ public class RouteEvent extends BaseEvent {
 
   private static class Service {
     private String id;
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
+    }
   }
 
   public String getName() {
@@ -61,6 +66,30 @@ public class RouteEvent extends BaseEvent {
 
   public void setPaths(List<String> paths) {
     this.paths = paths;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public long getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(long createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public long getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(long updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
   public List<String> getProtocols() {
@@ -133,46 +162,6 @@ public class RouteEvent extends BaseEvent {
 
   public void setService(Service service) {
     this.service = service;
-  }
-
-  public String getServiceId() {
-    return serviceId;
-  }
-
-  public void setServiceId(String serviceId) {
-    this.serviceId = serviceId;
-  }
-
-  public List<String> getMethods() {
-    return methods;
-  }
-
-  public void setMethods(List<String> methods) {
-    this.methods = methods;
-  }
-
-  public boolean isEnabled() {
-    return enabled;
-  }
-
-  public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
-  }
-
-  public long getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(long createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public long getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(long updatedAt) {
-    this.updatedAt = updatedAt;
   }
 }
 
