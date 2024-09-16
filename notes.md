@@ -1,16 +1,17 @@
 # Important Points
 
-1. should we produce messages in batch or one by one
-2. docker compose updates to run your programs as well - producer and consumer ?
-3. should we create streaming app or separate programs for producer/consumer.
-4. failure handling during message producing/consuming.
-5. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
+1. data in opensearch should go basis konnect entity id and updates handling should also be there.
+2. should we produce messages in batch or one by one
+3. docker compose updates to run your programs as well - producer and consumer ?
+4. should we create streaming app or separate programs for producer/consumer.
+5. failure handling during message producing/consuming.
+6. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
 in kafka or multiple topics for each type on konnect entity.
-6. which fields to be indexed in open search schema ?
-7. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
-8. logging in app
-9. any monitoring to see lags or any other metric ?
-10. add unit test cases too.
+7. which fields to be indexed in open search schema ?
+8. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
+9. logging in app
+10. any monitoring to see lags or any other metric ?
+11. add unit test cases too.
 
 
 # Understanding sample events schema and pattern

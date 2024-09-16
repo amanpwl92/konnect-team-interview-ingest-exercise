@@ -2,6 +2,7 @@ package org.konnect;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,6 @@ import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestClient;
 import org.opensearch.client.RestHighLevelClient;
-import org.elasticsearch.common.xcontent.XContentType;
 
 public class IngestExerciseConsumer {
 
@@ -26,19 +26,23 @@ public class IngestExerciseConsumer {
 
     try (consumer) {
       consumer.subscribe(Collections.singletonList(topic));
-      ObjectMapper objectMapper = new ObjectMapper();
       RestHighLevelClient openSearchClient = new RestHighLevelClient(
           RestClient.builder(new HttpHost("localhost", 9200, "http"))
       );
       while (true) {
         ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
         for (ConsumerRecord<String, String> record : records) {
+          String data = record.value();
+          ObjectMapper objectMapper = new ObjectMapper();
+          Map<String, Object> jsonMap = objectMapper.readValue(data, Map.class);
+
           System.out.printf("Consuming JSON record with key %s and value %s%n", record.key(), record.value());
+//          CdcKafkaEventValue data = objectMapper.readValue(record.value(), CdcKafkaEventValue.class);
           IndexRequest request = new IndexRequest("cdc")
-              .source(record.value(), XContentType.JSON);
+              .source(jsonMap);
           IndexResponse response = openSearchClient.index(request, RequestOptions.DEFAULT);
           // Convert JSON string to Java object
-          CdcKafkaEventValue data = objectMapper.readValue(record.value(), CdcKafkaEventValue.class);
+
           System.out.println("Indexed document with ID: " + response.getId());
           System.out.printf("Consumed JSON record with key %s and value %s%n", record.key(), data);
         }
