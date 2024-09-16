@@ -8,6 +8,10 @@ import java.util.Properties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.*;
+import org.konnect.schemas.cdcevent.BaseEvent;
+import org.konnect.schemas.cdcevent.NodeEvent;
+import org.konnect.schemas.cdcevent.RouteEvent;
+import org.konnect.schemas.cdcevent.ServiceEvent;
 import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;
@@ -32,12 +36,27 @@ public class IngestExerciseConsumer {
         ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
         for (ConsumerRecord<String, String> record : records) {
           String data = record.value();
+          String key = record.key();
+          String eventType = key.split(":")[0];
           ObjectMapper objectMapper = new ObjectMapper();
           Map<String, Object> jsonMap = objectMapper.readValue(data, Map.class);
+//          BaseEvent event = null;
+//
+//          if(eventType.equals("service")) {
+//            event = objectMapper.readValue(data, ServiceEvent.class);
+//          } else if (eventType.equals("node")) {
+//            event = objectMapper.readValue(data, NodeEvent.class);
+//          } else if (eventType.equals("route")) {
+//            event = objectMapper.readValue(data, RouteEvent.class);
+//          }
+//
+//          if (event == null) {
+//            continue;
+//          }
 
           System.out.printf("Consuming JSON record with key %s and value %s%n", record.key(), record.value());
-//          CdcKafkaEventValue data = objectMapper.readValue(record.value(), CdcKafkaEventValue.class);
           IndexRequest request = new IndexRequest("cdc")
+              .id(key.split(":")[1])
               .source(jsonMap);
           IndexResponse response = openSearchClient.index(request, RequestOptions.DEFAULT);
           // Convert JSON string to Java object
