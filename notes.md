@@ -37,3 +37,41 @@ last is cluster id. The events are for create and update both for a cluster. Ex 
 14. 2 event for composite-status
 15. 5 event for consumer_group
 16. 8 events for consumer
+
+# some working curls for opensearch
+
+```
+curl --location 'localhost:9200/cdc/_search?pretty=null&size=100' \
+--header 'Content-Type: application/json'
+```
+
+```
+curl --location --request GET 'http://localhost:9200/cdc/_search' \
+--header 'Content-Type: application/json' \
+--data '{
+  "query": {
+    "wildcard": {
+      "object.name": {
+        "value": "*namespace*"
+      }
+    }
+  }
+}'
+```
+
+
+```
+curl --location --request GET 'http://localhost:9200/cdc/_search' \
+--header 'Content-Type: application/json' \
+--data '{
+  "query": {
+    "match": {
+      "object.name": {
+        "query": "gateway",
+        "fuzziness": "AUTO"  
+      }
+    }
+  }
+}'
+
+```
