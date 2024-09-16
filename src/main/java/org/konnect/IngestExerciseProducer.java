@@ -5,25 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.apache.avro.Schema;
-import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.konnect.avro.ObjectData;
-import org.konnect.schemas.CdcEvent;
-import org.konnect.schemas.CdcEventValue;
-import org.konnect.schemas.CdcKafkaEventValue;
+import org.konnect.schemas.cdcevent.BaseEvent;
+import org.konnect.schemas.cdcevent.NodeEvent;
+import org.konnect.schemas.cdcevent.RouteEvent;
+import org.konnect.schemas.cdcevent.ServiceEvent;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IngestExerciseProducer {
@@ -60,21 +54,16 @@ public class IngestExerciseProducer {
 //    return producer.send(producerRecord);
 //  }
 
-  public void produce(String key, CdcKafkaEventValue cdcKafkaEventValue) {
-
-    if (key.contains("/service/") || key.contains("/node/") || key.contains("/route/")) {
+  public void produce(String key, BaseEvent event) {
       try {
         ObjectMapper mapper = new ObjectMapper();
-        String jsonString = mapper.writeValueAsString(cdcKafkaEventValue);
+        String jsonString = mapper.writeValueAsString(event);
         final ProducerRecord<String, String> producerRecord = new ProducerRecord<>(outTopic, key, jsonString);
         producer.send(producerRecord);
       } catch (JsonProcessingException ex) {
         System.out.println(ex);
       }
     }
-
-//    KafkaAvroSerializer abc
-  }
 
 //  public Future<RecordMetadata> produce(final String message) {
 //    final String[] parts = message.split("-");
@@ -144,21 +133,37 @@ public class IngestExerciseProducer {
 //      producerApp.printMetadata(metadata, filePath);
       String line;
       ObjectMapper mapper = new ObjectMapper();
-//      mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+      mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
       BufferedReader reader = new BufferedReader(new FileReader(filePath));
       while ((line = reader.readLine()) != null) {
         // Parse JSON line into a Map-like structure
 //        EventData eventData = mapper.readValue(line, EventData.class);
         try {
-          CdcEvent eventData = mapper.readValue(line, CdcEvent.class);
-          CdcEventValue eventValue = eventData.after.value;
-          CdcKafkaEventValue cdcKafkaEventValue = new CdcKafkaEventValue();
-          cdcKafkaEventValue.type = eventValue.type;
-          cdcKafkaEventValue.object = eventValue.object;
-          cdcKafkaEventValue.op = eventData.op;
-          cdcKafkaEventValue.ts_ms = eventData.ts_ms;
-          ;
-          producerApp.produce(eventData.after.key, cdcKafkaEventValue);
+          Map<String, Object> eventData = mapper.readValue(line, Map.class);
+          String eventKey = ((LinkedHashMap)eventData.get("after")).get("key").toString();
+          String eventValue = mapper.writeValueAsString(((LinkedHashMap)((LinkedHashMap) eventData.get("after")).get("value")).get("object"));
+
+
+//          CdcEventValue eventValue = eventData.after.value;
+//          CdcKafkaEventValue cdcKafkaEventValue = new CdcKafkaEventValue();
+//          cdcKafkaEventValue.type = eventValue.type;
+//          cdcKafkaEventValue.object = eventValue.object;
+//          cdcKafkaEventValue.op = eventData.op;
+//          cdcKafkaEventValue.ts_ms = eventData.ts_ms;
+//          ;
+//          System.out.println("hello");
+//          producerApp.produce(eventWrapper.getAfter().getKey(), eventWrapper.getAfter());
+          String eventType = extractEventType(eventKey);
+          BaseEvent event = null;
+          if(eventType.equals("service")) {
+            event = mapper.readValue(eventValue, ServiceEvent.class);
+          } else if (eventType.equals("node")) {
+            event = mapper.readValue(eventValue, NodeEvent.class);
+          } else if (eventType.equals("route")) {
+            event = mapper.readValue(eventValue, RouteEvent.class);
+          }
+          event.setKonnectEntity(eventType);
+          producerApp.produce(event.getId(), event);
         } catch (Exception ex) {
           System.err.printf("Event not mapped to object");
         }
@@ -169,6 +174,16 @@ public class IngestExerciseProducer {
     } finally {
       producerApp.shutdown();
     }
+  }
+
+  private static String extractEventType(String key) {
+    // Extract the type from the "key" (e.g., "node", "route", "service")
+    String[] parts = key.split("/o/");
+    if (parts.length > 1) {
+      String[] eventParts = parts[1].split("/");
+      return eventParts[0]; // node, route, service
+    }
+    throw new RuntimeException("Could not extract event type from key: " + key);
   }
 }
 

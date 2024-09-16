@@ -8,7 +8,6 @@ import java.util.Properties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.*;
-import org.konnect.schemas.CdcKafkaEventValue;
 import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;
