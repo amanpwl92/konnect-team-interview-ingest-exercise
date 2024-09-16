@@ -136,23 +136,11 @@ public class IngestExerciseProducer {
       mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
       BufferedReader reader = new BufferedReader(new FileReader(filePath));
       while ((line = reader.readLine()) != null) {
-        // Parse JSON line into a Map-like structure
-//        EventData eventData = mapper.readValue(line, EventData.class);
         try {
           Map<String, Object> eventData = mapper.readValue(line, Map.class);
           String eventKey = ((LinkedHashMap)eventData.get("after")).get("key").toString();
-          String eventValue = mapper.writeValueAsString(((LinkedHashMap)((LinkedHashMap) eventData.get("after")).get("value")).get("object"));
-
-
-//          CdcEventValue eventValue = eventData.after.value;
-//          CdcKafkaEventValue cdcKafkaEventValue = new CdcKafkaEventValue();
-//          cdcKafkaEventValue.type = eventValue.type;
-//          cdcKafkaEventValue.object = eventValue.object;
-//          cdcKafkaEventValue.op = eventData.op;
-//          cdcKafkaEventValue.ts_ms = eventData.ts_ms;
-//          ;
-//          System.out.println("hello");
-//          producerApp.produce(eventWrapper.getAfter().getKey(), eventWrapper.getAfter());
+          String eventValue = mapper.writeValueAsString(((LinkedHashMap)((LinkedHashMap)
+              eventData.get("after")).get("value")).get("object"));
           String eventType = extractEventType(eventKey);
           BaseEvent event = null;
           if(eventType.equals("service")) {
