@@ -1,6 +1,7 @@
 {
   "type": "record",
   "name": "CdcEventValue",
+  "namespace": "org.konnect.avro",
   "fields": [
     {"name": "type", "type": "int"},
     {
