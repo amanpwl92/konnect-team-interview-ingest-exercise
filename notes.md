@@ -1,24 +1,26 @@
 # Important Points
 
-1. data in opensearch should go basis konnect entity id and updates handling should also be there.
-2. should we produce messages in batch or one by one
-3. docker compose updates to run your programs as well - producer and consumer ?
-4. should we create streaming app or separate programs for producer/consumer.
-5. see if we can use avro for serialization/deserialization
-6. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
+1. data in opensearch should go basis konnect entity id and updates handling should also be there - DONE
+2. use xcontent from ES to send java object to ope search (instead of sending map)
+3. should we produce messages in batch or one by one
+4. docker compose updates to run your programs as well - producer and consumer ?
+5. should we create streaming app or separate programs for producer/consumer.
+6. see if we can use avro for serialization/deserialization
+7. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
 konnect objects from stream.jsonl ?
-7. create object from defined schema using kafka event at consumer side to be pushed to opensearch
-8. failure handling during message producing/consuming.
+8. create object from defined schema using kafka event at consumer side to be pushed to opensearch
+9. failure handling during message producing/consuming.
    1. in case we read an entry from jsonl and face issue during parsing or pushing to kafka, we could write that
    record to some other jsonl file (stream-error.jsonl)
-   2. similarly, if we face any error while consuming event , we could send it to some retry topic.
-9. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
+   2. similarly, if we face any error while consuming event , we could send it to some retry topic. We could also
+   try if possible to add retry logic and backoff factor while consuming messages.
+10. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
 in kafka or multiple topics for each type on konnect entity.
-10. which fields to be indexed in open search schema ?
-11. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
-12. logging in app
-13. any monitoring to see lags or any other metric ?
-14. add unit test cases too.
+11. which fields to be indexed in open search schema ?
+12. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
+13. logging in app
+14. any monitoring to see lags or any other metric ?
+15. add unit test cases too.
 
 
 # Understanding sample events schema and pattern
@@ -45,7 +47,7 @@ last is cluster id. The events are for create and update both for a cluster. Ex 
 15. 5 event for consumer_group
 16. 8 events for consumer
 
-Events to be considered count = 15+554+14 = 583
+Count of events to be considered  = 15+554+14 = 583
 
 # some working curls for opensearch
 

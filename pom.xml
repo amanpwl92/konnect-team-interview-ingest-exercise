@@ -74,11 +74,11 @@
             <version>${jackson.version}</version> <!-- Or a newer version -->
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.elasticsearch</groupId>-->
-<!--            <artifactId>elasticsearch</artifactId>-->
-<!--            <version>7.10.2</version> &lt;!&ndash; The last version before the fork to OpenSearch &ndash;&gt;-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>7.10.2</version> <!-- The last version before the fork to OpenSearch -->
+        </dependency>
 
         <!-- Avro tools for code generation -->
         <dependency>
