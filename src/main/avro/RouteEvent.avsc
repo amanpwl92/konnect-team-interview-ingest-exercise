@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "RouteEvent1",
+  "name": "RouteEvent",
   "namespace": "org.konnect.avro",
   "fields": [
     {

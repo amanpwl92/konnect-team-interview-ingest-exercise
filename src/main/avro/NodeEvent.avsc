@@ -1,7 +1,7 @@
 {
   "type": "record",
-  "name": "NodeEvent1",
-  "namespace": "org.example.avro",
+  "name": "NodeEvent",
+  "namespace": "org.konnect.avro",
   "fields": [
     {
       "name": "id",

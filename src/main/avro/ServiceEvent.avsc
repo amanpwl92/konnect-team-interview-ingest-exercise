@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "ServiceEvent1",
+  "name": "ServiceEvent",
   "namespace": "org.konnect.avro",
   "fields": [
     {

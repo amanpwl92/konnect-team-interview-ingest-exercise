@@ -2,8 +2,8 @@
 
 1. data in opensearch should go basis konnect entity id and updates handling should also be there - DONE
 2. note -  we need to set schema compatibilty as none for schema registry as we are pushing varying schemas for same 
-topic
-3. use xcontent from ES to send java object to ope search (instead of sending map)
+topic. Can we have something in docker compose for this ?
+3. use xcontent from ES to send java object to open search (instead of sending map)
 4. should we produce messages in batch or one by one
 5. docker compose updates to run your programs as well - producer and consumer ?
 6. should we create streaming app or separate programs for producer/consumer.
@@ -23,6 +23,9 @@ in kafka or multiple topics for each type on konnect entity.
 14. logging in app
 15. any monitoring to see lags or any other metric ?
 16. add unit test cases too.
+17. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
+map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
+map
 
 
 # Understanding sample events schema and pattern

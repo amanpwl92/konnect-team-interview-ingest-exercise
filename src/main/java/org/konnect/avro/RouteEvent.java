@@ -13,26 +13,26 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8419547176202253036L;
+public class RouteEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 3129038270954267720L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RouteEvent1\",\"namespace\":\"org.konnect.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"konnect_entity\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"]},{\"name\":\"paths\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"service\",\"type\":{\"type\":\"record\",\"name\":\"Service\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"}]}},{\"name\":\"protocols\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"created_at\",\"type\":\"long\"},{\"name\":\"strip_path\",\"type\":\"boolean\"},{\"name\":\"updated_at\",\"type\":\"long\"},{\"name\":\"path_handling\",\"type\":\"string\"},{\"name\":\"preserve_host\",\"type\":\"boolean\"},{\"name\":\"regex_priority\",\"type\":\"int\"},{\"name\":\"request_buffering\",\"type\":\"boolean\"},{\"name\":\"response_buffering\",\"type\":\"boolean\"},{\"name\":\"https_redirect_status_code\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RouteEvent\",\"namespace\":\"org.konnect.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"konnect_entity\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",\"string\"]},{\"name\":\"paths\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"service\",\"type\":{\"type\":\"record\",\"name\":\"Service\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"}]}},{\"name\":\"protocols\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"created_at\",\"type\":\"long\"},{\"name\":\"strip_path\",\"type\":\"boolean\"},{\"name\":\"updated_at\",\"type\":\"long\"},{\"name\":\"path_handling\",\"type\":\"string\"},{\"name\":\"preserve_host\",\"type\":\"boolean\"},{\"name\":\"regex_priority\",\"type\":\"int\"},{\"name\":\"request_buffering\",\"type\":\"boolean\"},{\"name\":\"response_buffering\",\"type\":\"boolean\"},{\"name\":\"https_redirect_status_code\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<RouteEvent1> ENCODER =
+  private static final BinaryMessageEncoder<RouteEvent> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<RouteEvent1> DECODER =
+  private static final BinaryMessageDecoder<RouteEvent> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<RouteEvent1> getEncoder() {
+  public static BinaryMessageEncoder<RouteEvent> getEncoder() {
     return ENCODER;
   }
 
@@ -40,7 +40,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<RouteEvent1> getDecoder() {
+  public static BinaryMessageDecoder<RouteEvent> getDecoder() {
     return DECODER;
   }
 
@@ -49,12 +49,12 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<RouteEvent1> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<RouteEvent> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this RouteEvent1 to a ByteBuffer.
+   * Serializes this RouteEvent to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -63,12 +63,12 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
-   * Deserializes a RouteEvent1 from a ByteBuffer.
+   * Deserializes a RouteEvent from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a RouteEvent1 instance decoded from the given buffer
+   * @return a RouteEvent instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static RouteEvent1 fromByteBuffer(
+  public static RouteEvent fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -94,7 +94,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public RouteEvent1() {}
+  public RouteEvent() {}
 
   /**
    * All-args constructor.
@@ -114,7 +114,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
    * @param response_buffering The new value for response_buffering
    * @param https_redirect_status_code The new value for https_redirect_status_code
    */
-  public RouteEvent1(java.lang.CharSequence id, java.lang.CharSequence konnect_entity, java.lang.CharSequence name, java.util.List<java.lang.CharSequence> paths, org.konnect.avro.Service service, java.util.List<java.lang.CharSequence> protocols, java.lang.Long created_at, java.lang.Boolean strip_path, java.lang.Long updated_at, java.lang.CharSequence path_handling, java.lang.Boolean preserve_host, java.lang.Integer regex_priority, java.lang.Boolean request_buffering, java.lang.Boolean response_buffering, java.lang.Integer https_redirect_status_code) {
+  public RouteEvent(java.lang.CharSequence id, java.lang.CharSequence konnect_entity, java.lang.CharSequence name, java.util.List<java.lang.CharSequence> paths, org.konnect.avro.Service service, java.util.List<java.lang.CharSequence> protocols, java.lang.Long created_at, java.lang.Boolean strip_path, java.lang.Long updated_at, java.lang.CharSequence path_handling, java.lang.Boolean preserve_host, java.lang.Integer regex_priority, java.lang.Boolean request_buffering, java.lang.Boolean response_buffering, java.lang.Integer https_redirect_status_code) {
     this.id = id;
     this.konnect_entity = konnect_entity;
     this.name = name;
@@ -441,45 +441,45 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
-   * Creates a new RouteEvent1 RecordBuilder.
-   * @return A new RouteEvent1 RecordBuilder
+   * Creates a new RouteEvent RecordBuilder.
+   * @return A new RouteEvent RecordBuilder
    */
-  public static org.konnect.avro.RouteEvent1.Builder newBuilder() {
-    return new org.konnect.avro.RouteEvent1.Builder();
+  public static org.konnect.avro.RouteEvent.Builder newBuilder() {
+    return new org.konnect.avro.RouteEvent.Builder();
   }
 
   /**
-   * Creates a new RouteEvent1 RecordBuilder by copying an existing Builder.
+   * Creates a new RouteEvent RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new RouteEvent1 RecordBuilder
+   * @return A new RouteEvent RecordBuilder
    */
-  public static org.konnect.avro.RouteEvent1.Builder newBuilder(org.konnect.avro.RouteEvent1.Builder other) {
+  public static org.konnect.avro.RouteEvent.Builder newBuilder(org.konnect.avro.RouteEvent.Builder other) {
     if (other == null) {
-      return new org.konnect.avro.RouteEvent1.Builder();
+      return new org.konnect.avro.RouteEvent.Builder();
     } else {
-      return new org.konnect.avro.RouteEvent1.Builder(other);
+      return new org.konnect.avro.RouteEvent.Builder(other);
     }
   }
 
   /**
-   * Creates a new RouteEvent1 RecordBuilder by copying an existing RouteEvent1 instance.
+   * Creates a new RouteEvent RecordBuilder by copying an existing RouteEvent instance.
    * @param other The existing instance to copy.
-   * @return A new RouteEvent1 RecordBuilder
+   * @return A new RouteEvent RecordBuilder
    */
-  public static org.konnect.avro.RouteEvent1.Builder newBuilder(org.konnect.avro.RouteEvent1 other) {
+  public static org.konnect.avro.RouteEvent.Builder newBuilder(org.konnect.avro.RouteEvent other) {
     if (other == null) {
-      return new org.konnect.avro.RouteEvent1.Builder();
+      return new org.konnect.avro.RouteEvent.Builder();
     } else {
-      return new org.konnect.avro.RouteEvent1.Builder(other);
+      return new org.konnect.avro.RouteEvent.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for RouteEvent1 instances.
+   * RecordBuilder for RouteEvent instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<RouteEvent1>
-    implements org.apache.avro.data.RecordBuilder<RouteEvent1> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<RouteEvent>
+    implements org.apache.avro.data.RecordBuilder<RouteEvent> {
 
     private java.lang.CharSequence id;
     private java.lang.CharSequence konnect_entity;
@@ -507,7 +507,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(org.konnect.avro.RouteEvent1.Builder other) {
+    private Builder(org.konnect.avro.RouteEvent.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -575,10 +575,10 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
     }
 
     /**
-     * Creates a Builder by copying an existing RouteEvent1 instance
+     * Creates a Builder by copying an existing RouteEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(org.konnect.avro.RouteEvent1 other) {
+    private Builder(org.konnect.avro.RouteEvent other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -657,7 +657,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setId(java.lang.CharSequence value) {
+    public org.konnect.avro.RouteEvent.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -677,7 +677,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearId() {
+    public org.konnect.avro.RouteEvent.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -697,7 +697,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'konnect_entity'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setKonnectEntity(java.lang.CharSequence value) {
+    public org.konnect.avro.RouteEvent.Builder setKonnectEntity(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.konnect_entity = value;
       fieldSetFlags()[1] = true;
@@ -717,7 +717,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'konnect_entity' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearKonnectEntity() {
+    public org.konnect.avro.RouteEvent.Builder clearKonnectEntity() {
       konnect_entity = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -737,7 +737,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setName(java.lang.CharSequence value) {
+    public org.konnect.avro.RouteEvent.Builder setName(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.name = value;
       fieldSetFlags()[2] = true;
@@ -757,7 +757,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearName() {
+    public org.konnect.avro.RouteEvent.Builder clearName() {
       name = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -777,7 +777,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'paths'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setPaths(java.util.List<java.lang.CharSequence> value) {
+    public org.konnect.avro.RouteEvent.Builder setPaths(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[3], value);
       this.paths = value;
       fieldSetFlags()[3] = true;
@@ -797,7 +797,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'paths' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearPaths() {
+    public org.konnect.avro.RouteEvent.Builder clearPaths() {
       paths = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -817,7 +817,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'service'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setService(org.konnect.avro.Service value) {
+    public org.konnect.avro.RouteEvent.Builder setService(org.konnect.avro.Service value) {
       validate(fields()[4], value);
       this.serviceBuilder = null;
       this.service = value;
@@ -854,7 +854,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
      * @return This builder.
      */
 
-    public org.konnect.avro.RouteEvent1.Builder setServiceBuilder(org.konnect.avro.Service.Builder value) {
+    public org.konnect.avro.RouteEvent.Builder setServiceBuilder(org.konnect.avro.Service.Builder value) {
       clearService();
       serviceBuilder = value;
       return this;
@@ -872,7 +872,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'service' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearService() {
+    public org.konnect.avro.RouteEvent.Builder clearService() {
       service = null;
       serviceBuilder = null;
       fieldSetFlags()[4] = false;
@@ -893,7 +893,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'protocols'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setProtocols(java.util.List<java.lang.CharSequence> value) {
+    public org.konnect.avro.RouteEvent.Builder setProtocols(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[5], value);
       this.protocols = value;
       fieldSetFlags()[5] = true;
@@ -913,7 +913,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'protocols' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearProtocols() {
+    public org.konnect.avro.RouteEvent.Builder clearProtocols() {
       protocols = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -933,7 +933,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'created_at'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setCreatedAt(long value) {
+    public org.konnect.avro.RouteEvent.Builder setCreatedAt(long value) {
       validate(fields()[6], value);
       this.created_at = value;
       fieldSetFlags()[6] = true;
@@ -953,7 +953,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'created_at' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearCreatedAt() {
+    public org.konnect.avro.RouteEvent.Builder clearCreatedAt() {
       fieldSetFlags()[6] = false;
       return this;
     }
@@ -972,7 +972,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'strip_path'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setStripPath(boolean value) {
+    public org.konnect.avro.RouteEvent.Builder setStripPath(boolean value) {
       validate(fields()[7], value);
       this.strip_path = value;
       fieldSetFlags()[7] = true;
@@ -992,7 +992,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'strip_path' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearStripPath() {
+    public org.konnect.avro.RouteEvent.Builder clearStripPath() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -1011,7 +1011,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'updated_at'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setUpdatedAt(long value) {
+    public org.konnect.avro.RouteEvent.Builder setUpdatedAt(long value) {
       validate(fields()[8], value);
       this.updated_at = value;
       fieldSetFlags()[8] = true;
@@ -1031,7 +1031,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'updated_at' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearUpdatedAt() {
+    public org.konnect.avro.RouteEvent.Builder clearUpdatedAt() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -1050,7 +1050,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'path_handling'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setPathHandling(java.lang.CharSequence value) {
+    public org.konnect.avro.RouteEvent.Builder setPathHandling(java.lang.CharSequence value) {
       validate(fields()[9], value);
       this.path_handling = value;
       fieldSetFlags()[9] = true;
@@ -1070,7 +1070,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'path_handling' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearPathHandling() {
+    public org.konnect.avro.RouteEvent.Builder clearPathHandling() {
       path_handling = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -1090,7 +1090,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'preserve_host'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setPreserveHost(boolean value) {
+    public org.konnect.avro.RouteEvent.Builder setPreserveHost(boolean value) {
       validate(fields()[10], value);
       this.preserve_host = value;
       fieldSetFlags()[10] = true;
@@ -1110,7 +1110,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'preserve_host' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearPreserveHost() {
+    public org.konnect.avro.RouteEvent.Builder clearPreserveHost() {
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -1129,7 +1129,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'regex_priority'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setRegexPriority(int value) {
+    public org.konnect.avro.RouteEvent.Builder setRegexPriority(int value) {
       validate(fields()[11], value);
       this.regex_priority = value;
       fieldSetFlags()[11] = true;
@@ -1149,7 +1149,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'regex_priority' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearRegexPriority() {
+    public org.konnect.avro.RouteEvent.Builder clearRegexPriority() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -1168,7 +1168,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'request_buffering'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setRequestBuffering(boolean value) {
+    public org.konnect.avro.RouteEvent.Builder setRequestBuffering(boolean value) {
       validate(fields()[12], value);
       this.request_buffering = value;
       fieldSetFlags()[12] = true;
@@ -1188,7 +1188,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'request_buffering' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearRequestBuffering() {
+    public org.konnect.avro.RouteEvent.Builder clearRequestBuffering() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1207,7 +1207,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'response_buffering'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setResponseBuffering(boolean value) {
+    public org.konnect.avro.RouteEvent.Builder setResponseBuffering(boolean value) {
       validate(fields()[13], value);
       this.response_buffering = value;
       fieldSetFlags()[13] = true;
@@ -1227,7 +1227,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'response_buffering' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearResponseBuffering() {
+    public org.konnect.avro.RouteEvent.Builder clearResponseBuffering() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -1246,7 +1246,7 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * @param value The value of 'https_redirect_status_code'.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder setHttpsRedirectStatusCode(int value) {
+    public org.konnect.avro.RouteEvent.Builder setHttpsRedirectStatusCode(int value) {
       validate(fields()[14], value);
       this.https_redirect_status_code = value;
       fieldSetFlags()[14] = true;
@@ -1266,16 +1266,16 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
       * Clears the value of the 'https_redirect_status_code' field.
       * @return This builder.
       */
-    public org.konnect.avro.RouteEvent1.Builder clearHttpsRedirectStatusCode() {
+    public org.konnect.avro.RouteEvent.Builder clearHttpsRedirectStatusCode() {
       fieldSetFlags()[14] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public RouteEvent1 build() {
+    public RouteEvent build() {
       try {
-        RouteEvent1 record = new RouteEvent1();
+        RouteEvent record = new RouteEvent();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.konnect_entity = fieldSetFlags()[1] ? this.konnect_entity : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.name = fieldSetFlags()[2] ? this.name : (java.lang.CharSequence) defaultValue(fields()[2]);
@@ -1310,8 +1310,8 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<RouteEvent1>
-    WRITER$ = (org.apache.avro.io.DatumWriter<RouteEvent1>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<RouteEvent>
+    WRITER$ = (org.apache.avro.io.DatumWriter<RouteEvent>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -1319,8 +1319,8 @@ public class RouteEvent1 extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<RouteEvent1>
-    READER$ = (org.apache.avro.io.DatumReader<RouteEvent1>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<RouteEvent>
+    READER$ = (org.apache.avro.io.DatumReader<RouteEvent>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

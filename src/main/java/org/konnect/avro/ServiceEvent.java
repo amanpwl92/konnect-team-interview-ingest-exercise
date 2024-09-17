@@ -13,26 +13,26 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4546498088759054432L;
+public class ServiceEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 9178087447611643273L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ServiceEvent1\",\"namespace\":\"org.konnect.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"host\",\"type\":\"string\"},{\"name\":\"konnect_entity\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"path\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"port\",\"type\":\"long\"},{\"name\":\"tags\",\"type\":[\"null\",{\"type\":\"array\",\"items\":[\"string\"]}]},{\"name\":\"enabled\",\"type\":\"boolean\"},{\"name\":\"retries\",\"type\":\"long\"},{\"name\":\"protocol\",\"type\":\"string\"},{\"name\":\"created_at\",\"type\":\"long\"},{\"name\":\"updated_at\",\"type\":\"long\"},{\"name\":\"read_timeout\",\"type\":\"long\"},{\"name\":\"write_timeout\",\"type\":\"long\"},{\"name\":\"connect_timeout\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ServiceEvent\",\"namespace\":\"org.konnect.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"host\",\"type\":\"string\"},{\"name\":\"konnect_entity\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"path\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"port\",\"type\":\"long\"},{\"name\":\"tags\",\"type\":[\"null\",{\"type\":\"array\",\"items\":[\"string\"]}]},{\"name\":\"enabled\",\"type\":\"boolean\"},{\"name\":\"retries\",\"type\":\"long\"},{\"name\":\"protocol\",\"type\":\"string\"},{\"name\":\"created_at\",\"type\":\"long\"},{\"name\":\"updated_at\",\"type\":\"long\"},{\"name\":\"read_timeout\",\"type\":\"long\"},{\"name\":\"write_timeout\",\"type\":\"long\"},{\"name\":\"connect_timeout\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<ServiceEvent1> ENCODER =
+  private static final BinaryMessageEncoder<ServiceEvent> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<ServiceEvent1> DECODER =
+  private static final BinaryMessageDecoder<ServiceEvent> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<ServiceEvent1> getEncoder() {
+  public static BinaryMessageEncoder<ServiceEvent> getEncoder() {
     return ENCODER;
   }
 
@@ -40,7 +40,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<ServiceEvent1> getDecoder() {
+  public static BinaryMessageDecoder<ServiceEvent> getDecoder() {
     return DECODER;
   }
 
@@ -49,12 +49,12 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<ServiceEvent1> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<ServiceEvent> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this ServiceEvent1 to a ByteBuffer.
+   * Serializes this ServiceEvent to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -63,12 +63,12 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
-   * Deserializes a ServiceEvent1 from a ByteBuffer.
+   * Deserializes a ServiceEvent from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a ServiceEvent1 instance decoded from the given buffer
+   * @return a ServiceEvent instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static ServiceEvent1 fromByteBuffer(
+  public static ServiceEvent fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -94,7 +94,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public ServiceEvent1() {}
+  public ServiceEvent() {}
 
   /**
    * All-args constructor.
@@ -114,7 +114,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
    * @param write_timeout The new value for write_timeout
    * @param connect_timeout The new value for connect_timeout
    */
-  public ServiceEvent1(java.lang.CharSequence id, java.lang.CharSequence host, java.lang.CharSequence konnect_entity, java.lang.CharSequence name, java.lang.CharSequence path, java.lang.Long port, java.util.List<java.lang.Object> tags, java.lang.Boolean enabled, java.lang.Long retries, java.lang.CharSequence protocol, java.lang.Long created_at, java.lang.Long updated_at, java.lang.Long read_timeout, java.lang.Long write_timeout, java.lang.Long connect_timeout) {
+  public ServiceEvent(java.lang.CharSequence id, java.lang.CharSequence host, java.lang.CharSequence konnect_entity, java.lang.CharSequence name, java.lang.CharSequence path, java.lang.Long port, java.util.List<java.lang.Object> tags, java.lang.Boolean enabled, java.lang.Long retries, java.lang.CharSequence protocol, java.lang.Long created_at, java.lang.Long updated_at, java.lang.Long read_timeout, java.lang.Long write_timeout, java.lang.Long connect_timeout) {
     this.id = id;
     this.host = host;
     this.konnect_entity = konnect_entity;
@@ -441,45 +441,45 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
-   * Creates a new ServiceEvent1 RecordBuilder.
-   * @return A new ServiceEvent1 RecordBuilder
+   * Creates a new ServiceEvent RecordBuilder.
+   * @return A new ServiceEvent RecordBuilder
    */
-  public static org.konnect.avro.ServiceEvent1.Builder newBuilder() {
-    return new org.konnect.avro.ServiceEvent1.Builder();
+  public static org.konnect.avro.ServiceEvent.Builder newBuilder() {
+    return new org.konnect.avro.ServiceEvent.Builder();
   }
 
   /**
-   * Creates a new ServiceEvent1 RecordBuilder by copying an existing Builder.
+   * Creates a new ServiceEvent RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new ServiceEvent1 RecordBuilder
+   * @return A new ServiceEvent RecordBuilder
    */
-  public static org.konnect.avro.ServiceEvent1.Builder newBuilder(org.konnect.avro.ServiceEvent1.Builder other) {
+  public static org.konnect.avro.ServiceEvent.Builder newBuilder(org.konnect.avro.ServiceEvent.Builder other) {
     if (other == null) {
-      return new org.konnect.avro.ServiceEvent1.Builder();
+      return new org.konnect.avro.ServiceEvent.Builder();
     } else {
-      return new org.konnect.avro.ServiceEvent1.Builder(other);
+      return new org.konnect.avro.ServiceEvent.Builder(other);
     }
   }
 
   /**
-   * Creates a new ServiceEvent1 RecordBuilder by copying an existing ServiceEvent1 instance.
+   * Creates a new ServiceEvent RecordBuilder by copying an existing ServiceEvent instance.
    * @param other The existing instance to copy.
-   * @return A new ServiceEvent1 RecordBuilder
+   * @return A new ServiceEvent RecordBuilder
    */
-  public static org.konnect.avro.ServiceEvent1.Builder newBuilder(org.konnect.avro.ServiceEvent1 other) {
+  public static org.konnect.avro.ServiceEvent.Builder newBuilder(org.konnect.avro.ServiceEvent other) {
     if (other == null) {
-      return new org.konnect.avro.ServiceEvent1.Builder();
+      return new org.konnect.avro.ServiceEvent.Builder();
     } else {
-      return new org.konnect.avro.ServiceEvent1.Builder(other);
+      return new org.konnect.avro.ServiceEvent.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for ServiceEvent1 instances.
+   * RecordBuilder for ServiceEvent instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<ServiceEvent1>
-    implements org.apache.avro.data.RecordBuilder<ServiceEvent1> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<ServiceEvent>
+    implements org.apache.avro.data.RecordBuilder<ServiceEvent> {
 
     private java.lang.CharSequence id;
     private java.lang.CharSequence host;
@@ -506,7 +506,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(org.konnect.avro.ServiceEvent1.Builder other) {
+    private Builder(org.konnect.avro.ServiceEvent.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -571,10 +571,10 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
-     * Creates a Builder by copying an existing ServiceEvent1 instance
+     * Creates a Builder by copying an existing ServiceEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(org.konnect.avro.ServiceEvent1 other) {
+    private Builder(org.konnect.avro.ServiceEvent other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -652,7 +652,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setId(java.lang.CharSequence value) {
+    public org.konnect.avro.ServiceEvent.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -672,7 +672,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearId() {
+    public org.konnect.avro.ServiceEvent.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -692,7 +692,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'host'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setHost(java.lang.CharSequence value) {
+    public org.konnect.avro.ServiceEvent.Builder setHost(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.host = value;
       fieldSetFlags()[1] = true;
@@ -712,7 +712,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'host' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearHost() {
+    public org.konnect.avro.ServiceEvent.Builder clearHost() {
       host = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -732,7 +732,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'konnect_entity'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setKonnectEntity(java.lang.CharSequence value) {
+    public org.konnect.avro.ServiceEvent.Builder setKonnectEntity(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.konnect_entity = value;
       fieldSetFlags()[2] = true;
@@ -752,7 +752,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'konnect_entity' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearKonnectEntity() {
+    public org.konnect.avro.ServiceEvent.Builder clearKonnectEntity() {
       konnect_entity = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -772,7 +772,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setName(java.lang.CharSequence value) {
+    public org.konnect.avro.ServiceEvent.Builder setName(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.name = value;
       fieldSetFlags()[3] = true;
@@ -792,7 +792,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearName() {
+    public org.konnect.avro.ServiceEvent.Builder clearName() {
       name = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -812,7 +812,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'path'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setPath(java.lang.CharSequence value) {
+    public org.konnect.avro.ServiceEvent.Builder setPath(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.path = value;
       fieldSetFlags()[4] = true;
@@ -832,7 +832,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'path' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearPath() {
+    public org.konnect.avro.ServiceEvent.Builder clearPath() {
       path = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -852,7 +852,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'port'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setPort(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setPort(long value) {
       validate(fields()[5], value);
       this.port = value;
       fieldSetFlags()[5] = true;
@@ -872,7 +872,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'port' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearPort() {
+    public org.konnect.avro.ServiceEvent.Builder clearPort() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -891,7 +891,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'tags'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setTags(java.util.List<java.lang.Object> value) {
+    public org.konnect.avro.ServiceEvent.Builder setTags(java.util.List<java.lang.Object> value) {
       validate(fields()[6], value);
       this.tags = value;
       fieldSetFlags()[6] = true;
@@ -911,7 +911,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'tags' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearTags() {
+    public org.konnect.avro.ServiceEvent.Builder clearTags() {
       tags = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -931,7 +931,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'enabled'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setEnabled(boolean value) {
+    public org.konnect.avro.ServiceEvent.Builder setEnabled(boolean value) {
       validate(fields()[7], value);
       this.enabled = value;
       fieldSetFlags()[7] = true;
@@ -951,7 +951,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'enabled' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearEnabled() {
+    public org.konnect.avro.ServiceEvent.Builder clearEnabled() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -970,7 +970,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'retries'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setRetries(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setRetries(long value) {
       validate(fields()[8], value);
       this.retries = value;
       fieldSetFlags()[8] = true;
@@ -990,7 +990,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'retries' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearRetries() {
+    public org.konnect.avro.ServiceEvent.Builder clearRetries() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -1009,7 +1009,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'protocol'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setProtocol(java.lang.CharSequence value) {
+    public org.konnect.avro.ServiceEvent.Builder setProtocol(java.lang.CharSequence value) {
       validate(fields()[9], value);
       this.protocol = value;
       fieldSetFlags()[9] = true;
@@ -1029,7 +1029,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'protocol' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearProtocol() {
+    public org.konnect.avro.ServiceEvent.Builder clearProtocol() {
       protocol = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -1049,7 +1049,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'created_at'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setCreatedAt(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setCreatedAt(long value) {
       validate(fields()[10], value);
       this.created_at = value;
       fieldSetFlags()[10] = true;
@@ -1069,7 +1069,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'created_at' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearCreatedAt() {
+    public org.konnect.avro.ServiceEvent.Builder clearCreatedAt() {
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -1088,7 +1088,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'updated_at'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setUpdatedAt(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setUpdatedAt(long value) {
       validate(fields()[11], value);
       this.updated_at = value;
       fieldSetFlags()[11] = true;
@@ -1108,7 +1108,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'updated_at' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearUpdatedAt() {
+    public org.konnect.avro.ServiceEvent.Builder clearUpdatedAt() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -1127,7 +1127,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'read_timeout'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setReadTimeout(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setReadTimeout(long value) {
       validate(fields()[12], value);
       this.read_timeout = value;
       fieldSetFlags()[12] = true;
@@ -1147,7 +1147,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'read_timeout' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearReadTimeout() {
+    public org.konnect.avro.ServiceEvent.Builder clearReadTimeout() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1166,7 +1166,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'write_timeout'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setWriteTimeout(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setWriteTimeout(long value) {
       validate(fields()[13], value);
       this.write_timeout = value;
       fieldSetFlags()[13] = true;
@@ -1186,7 +1186,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'write_timeout' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearWriteTimeout() {
+    public org.konnect.avro.ServiceEvent.Builder clearWriteTimeout() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -1205,7 +1205,7 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'connect_timeout'.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder setConnectTimeout(long value) {
+    public org.konnect.avro.ServiceEvent.Builder setConnectTimeout(long value) {
       validate(fields()[14], value);
       this.connect_timeout = value;
       fieldSetFlags()[14] = true;
@@ -1225,16 +1225,16 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'connect_timeout' field.
       * @return This builder.
       */
-    public org.konnect.avro.ServiceEvent1.Builder clearConnectTimeout() {
+    public org.konnect.avro.ServiceEvent.Builder clearConnectTimeout() {
       fieldSetFlags()[14] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public ServiceEvent1 build() {
+    public ServiceEvent build() {
       try {
-        ServiceEvent1 record = new ServiceEvent1();
+        ServiceEvent record = new ServiceEvent();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.host = fieldSetFlags()[1] ? this.host : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.konnect_entity = fieldSetFlags()[2] ? this.konnect_entity : (java.lang.CharSequence) defaultValue(fields()[2]);
@@ -1260,8 +1260,8 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<ServiceEvent1>
-    WRITER$ = (org.apache.avro.io.DatumWriter<ServiceEvent1>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<ServiceEvent>
+    WRITER$ = (org.apache.avro.io.DatumWriter<ServiceEvent>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -1269,8 +1269,8 @@ public class ServiceEvent1 extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<ServiceEvent1>
-    READER$ = (org.apache.avro.io.DatumReader<ServiceEvent1>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<ServiceEvent>
+    READER$ = (org.apache.avro.io.DatumReader<ServiceEvent>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

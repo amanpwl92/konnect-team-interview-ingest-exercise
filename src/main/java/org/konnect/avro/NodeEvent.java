@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package org.example.avro;
+package org.konnect.avro;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -13,26 +13,26 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2461358193553965533L;
+public class NodeEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = -2391624272122117788L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NodeEvent1\",\"namespace\":\"org.example.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"konnect_entity\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"labels\",\"type\":[\"null\",{\"type\":\"map\",\"values\":[\"null\",\"string\"]}],\"default\":null},{\"name\":\"version\",\"type\":\"string\"},{\"name\":\"hostname\",\"type\":\"string\"},{\"name\":\"last_ping\",\"type\":\"long\"},{\"name\":\"created_at\",\"type\":\"long\"},{\"name\":\"updated_at\",\"type\":\"long\"},{\"name\":\"config_hash\",\"type\":[\"null\",\"string\"]},{\"name\":\"process_conf\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"ProcessConf\",\"fields\":[{\"name\":\"plugins\",\"type\":[\"null\",{\"type\":\"array\",\"items\":[\"string\"]}],\"default\":null},{\"name\":\"lmdb_map_size\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"router_flavor\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"cluster_max_payload\",\"type\":\"int\"}]}]},{\"name\":\"connection_state\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"ConnectionState\",\"fields\":[{\"name\":\"is_connected\",\"type\":\"boolean\"}]}],\"default\":null},{\"name\":\"data_plane_cert_id\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NodeEvent\",\"namespace\":\"org.konnect.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"konnect_entity\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"labels\",\"type\":[\"null\",{\"type\":\"map\",\"values\":[\"null\",\"string\"]}],\"default\":null},{\"name\":\"version\",\"type\":\"string\"},{\"name\":\"hostname\",\"type\":\"string\"},{\"name\":\"last_ping\",\"type\":\"long\"},{\"name\":\"created_at\",\"type\":\"long\"},{\"name\":\"updated_at\",\"type\":\"long\"},{\"name\":\"config_hash\",\"type\":[\"null\",\"string\"]},{\"name\":\"process_conf\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"ProcessConf\",\"fields\":[{\"name\":\"plugins\",\"type\":[\"null\",{\"type\":\"array\",\"items\":[\"string\"]}],\"default\":null},{\"name\":\"lmdb_map_size\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"router_flavor\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"cluster_max_payload\",\"type\":\"int\"}]}]},{\"name\":\"connection_state\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"ConnectionState\",\"fields\":[{\"name\":\"is_connected\",\"type\":\"boolean\"}]}],\"default\":null},{\"name\":\"data_plane_cert_id\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<NodeEvent1> ENCODER =
+  private static final BinaryMessageEncoder<NodeEvent> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<NodeEvent1> DECODER =
+  private static final BinaryMessageDecoder<NodeEvent> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<NodeEvent1> getEncoder() {
+  public static BinaryMessageEncoder<NodeEvent> getEncoder() {
     return ENCODER;
   }
 
@@ -40,7 +40,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<NodeEvent1> getDecoder() {
+  public static BinaryMessageDecoder<NodeEvent> getDecoder() {
     return DECODER;
   }
 
@@ -49,12 +49,12 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<NodeEvent1> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<NodeEvent> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this NodeEvent1 to a ByteBuffer.
+   * Serializes this NodeEvent to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -63,12 +63,12 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   /**
-   * Deserializes a NodeEvent1 from a ByteBuffer.
+   * Deserializes a NodeEvent from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a NodeEvent1 instance decoded from the given buffer
+   * @return a NodeEvent instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static NodeEvent1 fromByteBuffer(
+  public static NodeEvent fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -83,8 +83,8 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
   private long created_at;
   private long updated_at;
   private java.lang.CharSequence config_hash;
-  private org.example.avro.ProcessConf process_conf;
-  private org.example.avro.ConnectionState connection_state;
+  private org.konnect.avro.ProcessConf process_conf;
+  private org.konnect.avro.ConnectionState connection_state;
   private java.lang.CharSequence data_plane_cert_id;
 
   /**
@@ -92,7 +92,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public NodeEvent1() {}
+  public NodeEvent() {}
 
   /**
    * All-args constructor.
@@ -110,7 +110,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * @param connection_state The new value for connection_state
    * @param data_plane_cert_id The new value for data_plane_cert_id
    */
-  public NodeEvent1(java.lang.CharSequence id, java.lang.CharSequence konnect_entity, java.lang.CharSequence type, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> labels, java.lang.CharSequence version, java.lang.CharSequence hostname, java.lang.Long last_ping, java.lang.Long created_at, java.lang.Long updated_at, java.lang.CharSequence config_hash, org.example.avro.ProcessConf process_conf, org.example.avro.ConnectionState connection_state, java.lang.CharSequence data_plane_cert_id) {
+  public NodeEvent(java.lang.CharSequence id, java.lang.CharSequence konnect_entity, java.lang.CharSequence type, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> labels, java.lang.CharSequence version, java.lang.CharSequence hostname, java.lang.Long last_ping, java.lang.Long created_at, java.lang.Long updated_at, java.lang.CharSequence config_hash, org.konnect.avro.ProcessConf process_conf, org.konnect.avro.ConnectionState connection_state, java.lang.CharSequence data_plane_cert_id) {
     this.id = id;
     this.konnect_entity = konnect_entity;
     this.type = type;
@@ -168,8 +168,8 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
     case 7: created_at = (java.lang.Long)value$; break;
     case 8: updated_at = (java.lang.Long)value$; break;
     case 9: config_hash = (java.lang.CharSequence)value$; break;
-    case 10: process_conf = (org.example.avro.ProcessConf)value$; break;
-    case 11: connection_state = (org.example.avro.ConnectionState)value$; break;
+    case 10: process_conf = (org.konnect.avro.ProcessConf)value$; break;
+    case 11: connection_state = (org.konnect.avro.ConnectionState)value$; break;
     case 12: data_plane_cert_id = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -349,7 +349,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'process_conf' field.
    * @return The value of the 'process_conf' field.
    */
-  public org.example.avro.ProcessConf getProcessConf() {
+  public org.konnect.avro.ProcessConf getProcessConf() {
     return process_conf;
   }
 
@@ -358,7 +358,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'process_conf' field.
    * @param value the value to set.
    */
-  public void setProcessConf(org.example.avro.ProcessConf value) {
+  public void setProcessConf(org.konnect.avro.ProcessConf value) {
     this.process_conf = value;
   }
 
@@ -366,7 +366,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * Gets the value of the 'connection_state' field.
    * @return The value of the 'connection_state' field.
    */
-  public org.example.avro.ConnectionState getConnectionState() {
+  public org.konnect.avro.ConnectionState getConnectionState() {
     return connection_state;
   }
 
@@ -375,7 +375,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
    * Sets the value of the 'connection_state' field.
    * @param value the value to set.
    */
-  public void setConnectionState(org.example.avro.ConnectionState value) {
+  public void setConnectionState(org.konnect.avro.ConnectionState value) {
     this.connection_state = value;
   }
 
@@ -397,45 +397,45 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   /**
-   * Creates a new NodeEvent1 RecordBuilder.
-   * @return A new NodeEvent1 RecordBuilder
+   * Creates a new NodeEvent RecordBuilder.
+   * @return A new NodeEvent RecordBuilder
    */
-  public static org.example.avro.NodeEvent1.Builder newBuilder() {
-    return new org.example.avro.NodeEvent1.Builder();
+  public static org.konnect.avro.NodeEvent.Builder newBuilder() {
+    return new org.konnect.avro.NodeEvent.Builder();
   }
 
   /**
-   * Creates a new NodeEvent1 RecordBuilder by copying an existing Builder.
+   * Creates a new NodeEvent RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new NodeEvent1 RecordBuilder
+   * @return A new NodeEvent RecordBuilder
    */
-  public static org.example.avro.NodeEvent1.Builder newBuilder(org.example.avro.NodeEvent1.Builder other) {
+  public static org.konnect.avro.NodeEvent.Builder newBuilder(org.konnect.avro.NodeEvent.Builder other) {
     if (other == null) {
-      return new org.example.avro.NodeEvent1.Builder();
+      return new org.konnect.avro.NodeEvent.Builder();
     } else {
-      return new org.example.avro.NodeEvent1.Builder(other);
+      return new org.konnect.avro.NodeEvent.Builder(other);
     }
   }
 
   /**
-   * Creates a new NodeEvent1 RecordBuilder by copying an existing NodeEvent1 instance.
+   * Creates a new NodeEvent RecordBuilder by copying an existing NodeEvent instance.
    * @param other The existing instance to copy.
-   * @return A new NodeEvent1 RecordBuilder
+   * @return A new NodeEvent RecordBuilder
    */
-  public static org.example.avro.NodeEvent1.Builder newBuilder(org.example.avro.NodeEvent1 other) {
+  public static org.konnect.avro.NodeEvent.Builder newBuilder(org.konnect.avro.NodeEvent other) {
     if (other == null) {
-      return new org.example.avro.NodeEvent1.Builder();
+      return new org.konnect.avro.NodeEvent.Builder();
     } else {
-      return new org.example.avro.NodeEvent1.Builder(other);
+      return new org.konnect.avro.NodeEvent.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for NodeEvent1 instances.
+   * RecordBuilder for NodeEvent instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<NodeEvent1>
-    implements org.apache.avro.data.RecordBuilder<NodeEvent1> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<NodeEvent>
+    implements org.apache.avro.data.RecordBuilder<NodeEvent> {
 
     private java.lang.CharSequence id;
     private java.lang.CharSequence konnect_entity;
@@ -447,10 +447,10 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
     private long created_at;
     private long updated_at;
     private java.lang.CharSequence config_hash;
-    private org.example.avro.ProcessConf process_conf;
-    private org.example.avro.ProcessConf.Builder process_confBuilder;
-    private org.example.avro.ConnectionState connection_state;
-    private org.example.avro.ConnectionState.Builder connection_stateBuilder;
+    private org.konnect.avro.ProcessConf process_conf;
+    private org.konnect.avro.ProcessConf.Builder process_confBuilder;
+    private org.konnect.avro.ConnectionState connection_state;
+    private org.konnect.avro.ConnectionState.Builder connection_stateBuilder;
     private java.lang.CharSequence data_plane_cert_id;
 
     /** Creates a new Builder */
@@ -462,7 +462,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(org.example.avro.NodeEvent1.Builder other) {
+    private Builder(org.konnect.avro.NodeEvent.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -509,14 +509,14 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
       if (other.hasProcessConfBuilder()) {
-        this.process_confBuilder = org.example.avro.ProcessConf.newBuilder(other.getProcessConfBuilder());
+        this.process_confBuilder = org.konnect.avro.ProcessConf.newBuilder(other.getProcessConfBuilder());
       }
       if (isValidValue(fields()[11], other.connection_state)) {
         this.connection_state = data().deepCopy(fields()[11].schema(), other.connection_state);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
       if (other.hasConnectionStateBuilder()) {
-        this.connection_stateBuilder = org.example.avro.ConnectionState.newBuilder(other.getConnectionStateBuilder());
+        this.connection_stateBuilder = org.konnect.avro.ConnectionState.newBuilder(other.getConnectionStateBuilder());
       }
       if (isValidValue(fields()[12], other.data_plane_cert_id)) {
         this.data_plane_cert_id = data().deepCopy(fields()[12].schema(), other.data_plane_cert_id);
@@ -525,10 +525,10 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
     }
 
     /**
-     * Creates a Builder by copying an existing NodeEvent1 instance
+     * Creates a Builder by copying an existing NodeEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(org.example.avro.NodeEvent1 other) {
+    private Builder(org.konnect.avro.NodeEvent other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -600,7 +600,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setId(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -620,7 +620,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearId() {
+    public org.konnect.avro.NodeEvent.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -640,7 +640,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'konnect_entity'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setKonnectEntity(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setKonnectEntity(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.konnect_entity = value;
       fieldSetFlags()[1] = true;
@@ -660,7 +660,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'konnect_entity' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearKonnectEntity() {
+    public org.konnect.avro.NodeEvent.Builder clearKonnectEntity() {
       konnect_entity = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -680,7 +680,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'type'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setType(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setType(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.type = value;
       fieldSetFlags()[2] = true;
@@ -700,7 +700,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'type' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearType() {
+    public org.konnect.avro.NodeEvent.Builder clearType() {
       type = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -720,7 +720,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'labels'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setLabels(java.util.Map<java.lang.CharSequence,java.lang.CharSequence> value) {
+    public org.konnect.avro.NodeEvent.Builder setLabels(java.util.Map<java.lang.CharSequence,java.lang.CharSequence> value) {
       validate(fields()[3], value);
       this.labels = value;
       fieldSetFlags()[3] = true;
@@ -740,7 +740,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'labels' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearLabels() {
+    public org.konnect.avro.NodeEvent.Builder clearLabels() {
       labels = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -760,7 +760,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'version'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setVersion(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setVersion(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.version = value;
       fieldSetFlags()[4] = true;
@@ -780,7 +780,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'version' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearVersion() {
+    public org.konnect.avro.NodeEvent.Builder clearVersion() {
       version = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -800,7 +800,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'hostname'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setHostname(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setHostname(java.lang.CharSequence value) {
       validate(fields()[5], value);
       this.hostname = value;
       fieldSetFlags()[5] = true;
@@ -820,7 +820,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'hostname' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearHostname() {
+    public org.konnect.avro.NodeEvent.Builder clearHostname() {
       hostname = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -840,7 +840,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'last_ping'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setLastPing(long value) {
+    public org.konnect.avro.NodeEvent.Builder setLastPing(long value) {
       validate(fields()[6], value);
       this.last_ping = value;
       fieldSetFlags()[6] = true;
@@ -860,7 +860,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'last_ping' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearLastPing() {
+    public org.konnect.avro.NodeEvent.Builder clearLastPing() {
       fieldSetFlags()[6] = false;
       return this;
     }
@@ -879,7 +879,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'created_at'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setCreatedAt(long value) {
+    public org.konnect.avro.NodeEvent.Builder setCreatedAt(long value) {
       validate(fields()[7], value);
       this.created_at = value;
       fieldSetFlags()[7] = true;
@@ -899,7 +899,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'created_at' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearCreatedAt() {
+    public org.konnect.avro.NodeEvent.Builder clearCreatedAt() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -918,7 +918,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'updated_at'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setUpdatedAt(long value) {
+    public org.konnect.avro.NodeEvent.Builder setUpdatedAt(long value) {
       validate(fields()[8], value);
       this.updated_at = value;
       fieldSetFlags()[8] = true;
@@ -938,7 +938,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'updated_at' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearUpdatedAt() {
+    public org.konnect.avro.NodeEvent.Builder clearUpdatedAt() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -957,7 +957,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'config_hash'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setConfigHash(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setConfigHash(java.lang.CharSequence value) {
       validate(fields()[9], value);
       this.config_hash = value;
       fieldSetFlags()[9] = true;
@@ -977,7 +977,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'config_hash' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearConfigHash() {
+    public org.konnect.avro.NodeEvent.Builder clearConfigHash() {
       config_hash = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -987,7 +987,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'process_conf' field.
       * @return The value.
       */
-    public org.example.avro.ProcessConf getProcessConf() {
+    public org.konnect.avro.ProcessConf getProcessConf() {
       return process_conf;
     }
 
@@ -997,7 +997,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'process_conf'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setProcessConf(org.example.avro.ProcessConf value) {
+    public org.konnect.avro.NodeEvent.Builder setProcessConf(org.konnect.avro.ProcessConf value) {
       validate(fields()[10], value);
       this.process_confBuilder = null;
       this.process_conf = value;
@@ -1017,12 +1017,12 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
      * Gets the Builder instance for the 'process_conf' field and creates one if it doesn't exist yet.
      * @return This builder.
      */
-    public org.example.avro.ProcessConf.Builder getProcessConfBuilder() {
+    public org.konnect.avro.ProcessConf.Builder getProcessConfBuilder() {
       if (process_confBuilder == null) {
         if (hasProcessConf()) {
-          setProcessConfBuilder(org.example.avro.ProcessConf.newBuilder(process_conf));
+          setProcessConfBuilder(org.konnect.avro.ProcessConf.newBuilder(process_conf));
         } else {
-          setProcessConfBuilder(org.example.avro.ProcessConf.newBuilder());
+          setProcessConfBuilder(org.konnect.avro.ProcessConf.newBuilder());
         }
       }
       return process_confBuilder;
@@ -1034,7 +1034,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
      * @return This builder.
      */
 
-    public org.example.avro.NodeEvent1.Builder setProcessConfBuilder(org.example.avro.ProcessConf.Builder value) {
+    public org.konnect.avro.NodeEvent.Builder setProcessConfBuilder(org.konnect.avro.ProcessConf.Builder value) {
       clearProcessConf();
       process_confBuilder = value;
       return this;
@@ -1052,7 +1052,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'process_conf' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearProcessConf() {
+    public org.konnect.avro.NodeEvent.Builder clearProcessConf() {
       process_conf = null;
       process_confBuilder = null;
       fieldSetFlags()[10] = false;
@@ -1063,7 +1063,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Gets the value of the 'connection_state' field.
       * @return The value.
       */
-    public org.example.avro.ConnectionState getConnectionState() {
+    public org.konnect.avro.ConnectionState getConnectionState() {
       return connection_state;
     }
 
@@ -1073,7 +1073,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'connection_state'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setConnectionState(org.example.avro.ConnectionState value) {
+    public org.konnect.avro.NodeEvent.Builder setConnectionState(org.konnect.avro.ConnectionState value) {
       validate(fields()[11], value);
       this.connection_stateBuilder = null;
       this.connection_state = value;
@@ -1093,12 +1093,12 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
      * Gets the Builder instance for the 'connection_state' field and creates one if it doesn't exist yet.
      * @return This builder.
      */
-    public org.example.avro.ConnectionState.Builder getConnectionStateBuilder() {
+    public org.konnect.avro.ConnectionState.Builder getConnectionStateBuilder() {
       if (connection_stateBuilder == null) {
         if (hasConnectionState()) {
-          setConnectionStateBuilder(org.example.avro.ConnectionState.newBuilder(connection_state));
+          setConnectionStateBuilder(org.konnect.avro.ConnectionState.newBuilder(connection_state));
         } else {
-          setConnectionStateBuilder(org.example.avro.ConnectionState.newBuilder());
+          setConnectionStateBuilder(org.konnect.avro.ConnectionState.newBuilder());
         }
       }
       return connection_stateBuilder;
@@ -1110,7 +1110,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
      * @return This builder.
      */
 
-    public org.example.avro.NodeEvent1.Builder setConnectionStateBuilder(org.example.avro.ConnectionState.Builder value) {
+    public org.konnect.avro.NodeEvent.Builder setConnectionStateBuilder(org.konnect.avro.ConnectionState.Builder value) {
       clearConnectionState();
       connection_stateBuilder = value;
       return this;
@@ -1128,7 +1128,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'connection_state' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearConnectionState() {
+    public org.konnect.avro.NodeEvent.Builder clearConnectionState() {
       connection_state = null;
       connection_stateBuilder = null;
       fieldSetFlags()[11] = false;
@@ -1149,7 +1149,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * @param value The value of 'data_plane_cert_id'.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder setDataPlaneCertId(java.lang.CharSequence value) {
+    public org.konnect.avro.NodeEvent.Builder setDataPlaneCertId(java.lang.CharSequence value) {
       validate(fields()[12], value);
       this.data_plane_cert_id = value;
       fieldSetFlags()[12] = true;
@@ -1169,7 +1169,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
       * Clears the value of the 'data_plane_cert_id' field.
       * @return This builder.
       */
-    public org.example.avro.NodeEvent1.Builder clearDataPlaneCertId() {
+    public org.konnect.avro.NodeEvent.Builder clearDataPlaneCertId() {
       data_plane_cert_id = null;
       fieldSetFlags()[12] = false;
       return this;
@@ -1177,9 +1177,9 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
 
     @Override
     @SuppressWarnings("unchecked")
-    public NodeEvent1 build() {
+    public NodeEvent build() {
       try {
-        NodeEvent1 record = new NodeEvent1();
+        NodeEvent record = new NodeEvent();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.konnect_entity = fieldSetFlags()[1] ? this.konnect_entity : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.type = fieldSetFlags()[2] ? this.type : (java.lang.CharSequence) defaultValue(fields()[2]);
@@ -1198,7 +1198,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
             throw e;
           }
         } else {
-          record.process_conf = fieldSetFlags()[10] ? this.process_conf : (org.example.avro.ProcessConf) defaultValue(fields()[10]);
+          record.process_conf = fieldSetFlags()[10] ? this.process_conf : (org.konnect.avro.ProcessConf) defaultValue(fields()[10]);
         }
         if (connection_stateBuilder != null) {
           try {
@@ -1208,7 +1208,7 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
             throw e;
           }
         } else {
-          record.connection_state = fieldSetFlags()[11] ? this.connection_state : (org.example.avro.ConnectionState) defaultValue(fields()[11]);
+          record.connection_state = fieldSetFlags()[11] ? this.connection_state : (org.konnect.avro.ConnectionState) defaultValue(fields()[11]);
         }
         record.data_plane_cert_id = fieldSetFlags()[12] ? this.data_plane_cert_id : (java.lang.CharSequence) defaultValue(fields()[12]);
         return record;
@@ -1221,8 +1221,8 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<NodeEvent1>
-    WRITER$ = (org.apache.avro.io.DatumWriter<NodeEvent1>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<NodeEvent>
+    WRITER$ = (org.apache.avro.io.DatumWriter<NodeEvent>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -1230,8 +1230,8 @@ public class NodeEvent1 extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<NodeEvent1>
-    READER$ = (org.apache.avro.io.DatumReader<NodeEvent1>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<NodeEvent>
+    READER$ = (org.apache.avro.io.DatumReader<NodeEvent>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
