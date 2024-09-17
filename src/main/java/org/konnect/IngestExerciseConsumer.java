@@ -1,10 +1,7 @@
 package org.konnect;
 
 import java.time.Duration;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Properties;
-
+import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.*;
@@ -20,7 +17,7 @@ public class IngestExerciseConsumer {
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
     final String topic = "cdc-events";
 
-    Consumer<String, String> consumer = new KafkaConsumer<>(props);
+    Consumer<String, Object> consumer = new KafkaConsumer<>(props);
     System.out.println("consumer started");
 
     try (consumer) {
@@ -29,13 +26,15 @@ public class IngestExerciseConsumer {
           RestClient.builder(new HttpHost("localhost", 9200, "http"))
       );
       while (true) {
-        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-        for (ConsumerRecord<String, String> record : records) {
-          String data = record.value();
+        ConsumerRecords<String, Object> records = consumer.poll(Duration.ofMillis(100));
+        for (ConsumerRecord<String, Object> record : records) {
+          Object data = record.value();
           String key = record.key();
           String eventType = key.split(":")[0];
           ObjectMapper objectMapper = new ObjectMapper();
-          Map<String, Object> jsonMap = objectMapper.readValue(data, Map.class);
+//          String json = objectMapper.writeValueAsString(data);
+//          ObjectMapper objectMapper = new ObjectMapper();
+          Map<String, Object> jsonMap = objectMapper.readValue(data.toString(), Map.class);
 //          BaseEvent event = null;
 //
 //          if(eventType.equals("service")) {
@@ -49,7 +48,9 @@ public class IngestExerciseConsumer {
 //          if (event == null) {
 //            continue;
 //          }
-
+//          Map<String, Object> map = convert(data);
+//          Map<String, Object> map = ObjectToMapConverter.convertToMap(data);
+//          Map<String, String> map = BeanUtils.describe(data);
           System.out.printf("Consuming JSON record with key %s and value %s%n", record.key(), record.value());
           IndexRequest request = new IndexRequest("cdc")
               .id(key.split(":")[1])
@@ -57,7 +58,7 @@ public class IngestExerciseConsumer {
           IndexResponse response = openSearchClient.index(request, RequestOptions.DEFAULT);
           // Convert JSON string to Java object
 
-          System.out.println("Indexed document with ID: " + response.getId());
+//          System.out.println("Indexed document with ID: " + response.getId());
           System.out.printf("Consumed JSON record with key %s and value %s%n", record.key(), data);
         }
       }

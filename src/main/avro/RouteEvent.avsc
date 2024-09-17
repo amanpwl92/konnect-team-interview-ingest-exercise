@@ -1,0 +1,83 @@
+{
+  "type": "record",
+  "name": "RouteEvent",
+  "namespace": "org.konnect.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "konnect_entity",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "name",
+      "type": ["null","string"]
+    },
+    {
+      "name": "paths",
+      "type": {
+        "type": "array",
+        "items": "string"
+      }
+    },
+    {
+      "name": "service",
+      "type": {
+        "type": "record",
+        "name": "Service",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "protocols",
+      "type": {
+        "type": "array",
+        "items": "string"
+      }
+    },
+    {
+      "name": "created_at",
+      "type": "long"
+    },
+    {
+      "name": "strip_path",
+      "type": "boolean"
+    },
+    {
+      "name": "updated_at",
+      "type": "long"
+    },
+    {
+      "name": "path_handling",
+      "type": "string"
+    },
+    {
+      "name": "preserve_host",
+      "type": "boolean"
+    },
+    {
+      "name": "regex_priority",
+      "type": "int"
+    },
+    {
+      "name": "request_buffering",
+      "type": "boolean"
+    },
+    {
+      "name": "response_buffering",
+      "type": "boolean"
+    },
+    {
+      "name": "https_redirect_status_code",
+      "type": "int"
+    }
+  ]
+}
