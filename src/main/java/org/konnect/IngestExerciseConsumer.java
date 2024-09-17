@@ -39,10 +39,10 @@ public class IngestExerciseConsumer {
           Object data = record.value();
           String key = record.key();
           String eventType = key.split(":")[0];
-//          ObjectMapper objectMapper = new ObjectMapper();
+          ObjectMapper objectMapper = new ObjectMapper();
 //          String json = objectMapper.writeValueAsString(data);
 //          ObjectMapper objectMapper = new ObjectMapper();
-//          Map<String, Object> jsonMap = objectMapper.convertValue(data, Map.class);
+          Map<String, Object> jsonMap = objectMapper.readValue(data.toString(), Map.class);
 //          BaseEvent event = null;
 //
 //          if(eventType.equals("service")) {
@@ -58,11 +58,11 @@ public class IngestExerciseConsumer {
 //          }
 //          Map<String, Object> map = convert(data);
 //          Map<String, Object> map = ObjectToMapConverter.convertToMap(data);
-          Map<String, String> map = BeanUtils.describe(data);
+//          Map<String, String> map = BeanUtils.describe(data);
           System.out.printf("Consuming JSON record with key %s and value %s%n", record.key(), record.value());
           IndexRequest request = new IndexRequest("cdc")
               .id(key.split(":")[1])
-              .source(map);
+              .source(jsonMap);
           IndexResponse response = openSearchClient.index(request, RequestOptions.DEFAULT);
           // Convert JSON string to Java object
 
