@@ -4,29 +4,28 @@
 2. note -  we need to set schema compatibilty as none for schema registry as we are pushing varying schemas for same 
 topic. Can we have something in docker compose for this ?
 ```curl -X PUT http://localhost:8081/config --header "Content-Type: application/vnd.schemaregistry.v1+json" --data '{"compatibility": "none"}'```
-3. use xcontent from ES to send java object to open search (instead of sending map) - NOT NEEDED
-4. should we produce messages in batch or one by one
-5. docker compose updates to run your programs as well - producer and consumer ?
-6. should we create streaming app or separate programs for producer/consumer.
-7. see if we can use avro for serialization/deserialization
-8. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
+3. should we produce messages in batch or one by one
+4. docker compose updates to run your programs as well - producer and consumer ?
+5. see if we can use avro for serialization/deserialization - DONE
+6. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
 konnect objects from stream.jsonl ?
-9. create object from defined schema using kafka event at consumer side to be pushed to opensearch
-10. failure handling during message producing/consuming.
-    1. in case we read an entry from jsonl and face issue during parsing or pushing to kafka, we could write that
-    record to some other jsonl file (stream-error.jsonl)
-    2. similarly, if we face any error while consuming event , we could send it to some retry topic. We could also
-    try if possible to add retry logic and backoff factor while consuming messages.
-11. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
+7. create object from defined schema using kafka event at consumer side to be pushed to opensearch
+8. failure handling during message producing/consuming.
+   1. in case we read an entry from jsonl and face issue during parsing or pushing to kafka, we could write that
+   record to some other jsonl file (stream-error.jsonl)
+   2. similarly, if we face any error while consuming event , we could send it to some retry topic. We could also
+   try if possible to add retry logic and backoff factor while consuming messages.
+9. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
 in kafka or multiple topics for each type on konnect entity.
-12. which fields to be indexed in open search schema ?
-13. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
-14. logging in app
-15. any monitoring to see lags or any other metric ?
-16. add unit test cases too.
-17. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
+10. which fields to be indexed in open search schema ?
+11. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
+12. logging in app, comments in code
+13. any monitoring to see lags or any other metric ?
+14. add unit test cases too.
+15. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
 map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
 map
+16. Add steps to run the producer, consumer and also curl for compatibility none
 
 
 # Understanding sample events schema and pattern

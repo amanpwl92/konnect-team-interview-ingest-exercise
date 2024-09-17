@@ -100,5 +100,24 @@ services:
       - 'OPENSEARCH_HOSTS=["http://opensearch-node:9200"]'
       - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
 
+#  ingest-producer:
+#    image: maven:3.8.5-openjdk-17-slim  # Use appropriate Java image
+#    container_name: ingest-producer
+#    volumes:
+#      - .:/app  # Mount your source code directory to the container
+#    working_dir: /app  # Set the working directory to where your .java file is located
+#    command: >
+#      sh -c "echo 'Starting Java app after a delay...'
+#      sleep 10 &&
+#      mvn clean package -DskipTests &&
+#      java -cp target/classes:target/dependency/* org.konnect.IngestExerciseConsumer"
+#    depends_on:
+#      - kafka  # If your Java app depends on Kafka or other services
+#      - init-kafka
+#      - opensearch-node
+#      - schema-registry
+#    environment:
+#      JAVA_OPTS: "-Xmx512m"  # Set any JVM options if needed
+
 volumes:
   opensearch-data:
