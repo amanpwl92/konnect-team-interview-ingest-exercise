@@ -3,12 +3,14 @@ package org.konnect;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.*;
+import org.apache.commons.beanutils.BeanUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.avro.util.Utf8;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.*;
+import org.connect.ObjectToMapConverter;
 import org.konnect.avro.ServiceEvent1;
 import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.index.IndexResponse;
@@ -54,7 +56,9 @@ public class IngestExerciseConsumer {
 //          if (event == null) {
 //            continue;
 //          }
-          Map<String, Object> map = convert(data);
+//          Map<String, Object> map = convert(data);
+//          Map<String, Object> map = ObjectToMapConverter.convertToMap(data);
+          Map<String, String> map = BeanUtils.describe(data);
           System.out.printf("Consuming JSON record with key %s and value %s%n", record.key(), record.value());
           IndexRequest request = new IndexRequest("cdc")
               .id(key.split(":")[1])
