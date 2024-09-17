@@ -3,7 +3,8 @@
 1. data in opensearch should go basis konnect entity id and updates handling should also be there - DONE
 2. note -  we need to set schema compatibilty as none for schema registry as we are pushing varying schemas for same 
 topic. Can we have something in docker compose for this ?
-3. use xcontent from ES to send java object to open search (instead of sending map)
+```curl -X PUT http://localhost:8081/config --header "Content-Type: application/vnd.schemaregistry.v1+json" --data '{"compatibility": "none"}'```
+3. use xcontent from ES to send java object to open search (instead of sending map) - NOT NEEDED
 4. should we produce messages in batch or one by one
 5. docker compose updates to run your programs as well - producer and consumer ?
 6. should we create streaming app or separate programs for producer/consumer.
