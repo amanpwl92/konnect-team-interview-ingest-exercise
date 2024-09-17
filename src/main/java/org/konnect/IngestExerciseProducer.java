@@ -7,11 +7,13 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
-import org.konnect.avro.LongDeserializer;
+import org.example.avro.NodeEvent1;
+import org.konnect.avro.RouteEvent1;
 import org.konnect.avro.ServiceEvent1;
 import org.konnect.schemas.cdcevent.BaseEvent;
 import org.konnect.schemas.cdcevent.NodeEvent;
@@ -26,12 +28,18 @@ import java.util.concurrent.Future;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IngestExerciseProducer {
 
-  private final Producer<String, ServiceEvent1> producer;
+  private final Producer<String, ServiceEvent1> serviceEvent1Producer;
+  private final Producer<String, NodeEvent1> nodeEvent1Producer;
+  private final Producer<String, RouteEvent1> routeEvent1Producer;
   final String outTopic;
 
-  public IngestExerciseProducer(final Producer<String, ServiceEvent1> producer,
+  public IngestExerciseProducer(final Producer<String, ServiceEvent1> serviceEvent1Producer,
+                                final Producer<String, NodeEvent1> nodeEvent1Producer,
+                                final Producer<String, RouteEvent1> routeEvent1Producer,
                                 final String topic) {
-    this.producer = producer;
+    this.serviceEvent1Producer = serviceEvent1Producer;
+    this.nodeEvent1Producer = nodeEvent1Producer;
+    this.routeEvent1Producer = routeEvent1Producer;
     outTopic = topic;
   }
 
@@ -74,7 +82,29 @@ public class IngestExerciseProducer {
 //      ObjectMapper mapper = new ObjectMapper();
 //      String jsonString = mapper.writeValueAsString(event);
       final ProducerRecord<String, ServiceEvent1> producerRecord = new ProducerRecord<>(outTopic, key, event);
-      producer.send(producerRecord);
+      serviceEvent1Producer.send(producerRecord);
+    } catch (Exception ex) {
+      System.out.println(ex);
+    }
+  }
+
+  public void produce2(String key, NodeEvent1 event) {
+    try {
+//      ObjectMapper mapper = new ObjectMapper();
+//      String jsonString = mapper.writeValueAsString(event);
+      final ProducerRecord<String, NodeEvent1> producerRecord = new ProducerRecord<>(outTopic, key, event);
+      nodeEvent1Producer.send(producerRecord);
+    } catch (Exception ex) {
+      System.out.println(ex);
+    }
+  }
+
+  public void produce3(String key, RouteEvent1 event) {
+    try {
+//      ObjectMapper mapper = new ObjectMapper();
+//      String jsonString = mapper.writeValueAsString(event);
+      final ProducerRecord<String, RouteEvent1> producerRecord = new ProducerRecord<>(outTopic, key, event);
+      routeEvent1Producer.send(producerRecord);
     } catch (Exception ex) {
       System.out.println(ex);
     }
@@ -96,7 +126,9 @@ public class IngestExerciseProducer {
 //  }
 
   public void shutdown() {
-    producer.close();
+    serviceEvent1Producer.close();
+    routeEvent1Producer.close();
+    nodeEvent1Producer.close();
   }
 
   public static Properties loadProperties(String fileName) throws IOException {
@@ -134,8 +166,11 @@ public class IngestExerciseProducer {
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
     final String topic = "cdc-events";
 //    final Producer<String, String> producer = new KafkaProducer<>(new HashMap<>());
-    final Producer<String, ServiceEvent1> producer = new KafkaProducer<>(props);
-    final IngestExerciseProducer producerApp = new IngestExerciseProducer(producer, topic);
+    final Producer<String, ServiceEvent1> serviceEvent1Producer = new KafkaProducer<>(props);
+    final Producer<String, RouteEvent1> routeEvent1Producer = new KafkaProducer<>(props);
+    final Producer<String, NodeEvent1> nodeEvent1Producer = new KafkaProducer<>(props);
+    final IngestExerciseProducer producerApp = new IngestExerciseProducer(serviceEvent1Producer, nodeEvent1Producer,
+        routeEvent1Producer, topic);
 
 //    String filePath = args[1];
     String filePath = "./stream.jsonl";
@@ -161,23 +196,32 @@ public class IngestExerciseProducer {
           String eventType = extractEventType(eventKey);
           BaseEvent event = null;
           ServiceEvent1 serviceEvent1 = null;
+          RouteEvent1 routeEvent1 = null;
+          NodeEvent1 nodeEvent1 = null;
 
 
           if(eventType.equals("service")) {
             serviceEvent1 = mapper.readValue(eventValue, ServiceEvent1.class);
+            serviceEvent1.setKonnectEntity(eventType);
+            producerApp.produce1(eventType + ":" + serviceEvent1.getId(), serviceEvent1);
           }
-//          else if (eventType.equals("node")) {
-//            event = mapper.readValue(eventValue, NodeEvent.class);
-//          } else if (eventType.equals("route")) {
-//            event = mapper.readValue(eventValue, RouteEvent.class);
-//          }
-
-          if(serviceEvent1 == null) {
+          else if (eventType.equals("node")) {
+            nodeEvent1 = mapper.readValue(eventValue, NodeEvent1.class);
+            nodeEvent1.setKonnectEntity(eventType);
+            producerApp.produce2(eventType + ":" + nodeEvent1.getId(), nodeEvent1);
+          } else if (eventType.equals("route")) {
+            routeEvent1 = mapper.readValue(eventValue, RouteEvent1.class);
+            routeEvent1.setKonnectEntity(eventType);
+            producerApp.produce3(eventType + ":" + routeEvent1.getId(), routeEvent1);
+          } else {
             continue;
           }
 
-          serviceEvent1.setKonnectEntity(eventType);
-          producerApp.produce1(eventType + ":" + serviceEvent1.getId(), serviceEvent1);
+//          if(serviceEvent1 == null) {
+//            continue;
+//          }
+
+
         } catch (Exception ex) {
           System.err.printf("Event not mapped to object");
         }

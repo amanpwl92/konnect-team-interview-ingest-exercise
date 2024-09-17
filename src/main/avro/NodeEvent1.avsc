@@ -1,0 +1,102 @@
+{
+  "type": "record",
+  "name": "NodeEvent1",
+  "namespace": "org.example.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "konnect_entity",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "labels",
+      "type": ["null", {
+        "type": "map",
+        "values": ["null", "string"]  // Values can be null or string
+      }],
+      "default": null  // Default value is null
+    },
+    {
+      "name": "version",
+      "type": "string"
+    },
+    {
+      "name": "hostname",
+      "type": "string"
+    },
+    {
+      "name": "last_ping",
+      "type": "long"
+    },
+    {
+      "name": "created_at",
+      "type": "long"
+    },
+    {
+      "name": "updated_at",
+      "type": "long"
+    },
+    {
+      "name": "config_hash",
+      "type": ["null","string"]
+    },
+    {
+      "name": "process_conf",
+      "type": ["null", {
+        "type": "record",
+        "name": "ProcessConf",
+        "fields": [
+          {
+            "name": "plugins",
+            "type": ["null", {
+              "type": "array",
+              "items": ["string"]
+            }],
+            "default": null
+          },
+          {
+            "name": "lmdb_map_size",
+            "type": ["null","string"],
+            "default": null
+          },
+          {
+            "name": "router_flavor",
+            "type": ["null","string"],
+            "default": null
+          },
+          {
+            "name": "cluster_max_payload",
+            "type": "int"
+          }
+        ]
+      }]
+    },
+    {
+      "name": "connection_state",
+      "type": ["null", {
+        "type": "record",
+        "name": "ConnectionState",
+        "fields": [
+          {
+            "name": "is_connected",
+            "type": "boolean"
+          }
+        ]
+      }],
+      "default": null
+    },
+    {
+      "name": "data_plane_cert_id",
+      "type": ["null","string"],
+      "default": null
+    }
+  ]
+}

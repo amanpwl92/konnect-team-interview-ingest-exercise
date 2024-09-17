@@ -34,7 +34,7 @@ public class IngestExerciseConsumer {
       while (true) {
         ConsumerRecords<String, ServiceEvent1> records = consumer.poll(Duration.ofMillis(100));
         for (ConsumerRecord<String, ServiceEvent1> record : records) {
-          ServiceEvent1 data = record.value();
+          Object data = record.value();
           String key = record.key();
           String eventType = key.split(":")[0];
 //          ObjectMapper objectMapper = new ObjectMapper();
