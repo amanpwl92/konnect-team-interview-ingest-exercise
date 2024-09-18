@@ -20,9 +20,9 @@
       "name": "labels",
       "type": ["null", {
         "type": "map",
-        "values": ["null", "string"]  // Values can be null or string
+        "values": ["null", "string"]
       }],
-      "default": null  // Default value is null
+      "default": null
     },
     {
       "name": "version",
