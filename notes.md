@@ -1,34 +1,17 @@
-# Important Points
+# Important Points that could be addressed as enhancement
 
-1. ~~data in opensearch should go basis konnect entity id and updates handling should also be there~~
-2. should we produce messages in batch or one by one
-3. docker compose updates to run your programs as well - producer and consumer ?
-4. ~~see if we can use avro for serialization/deserialization~~
-5. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
-konnect objects from stream.jsonl ?
-6. ~~create object from defined schema using kafka event at consumer side to be pushed to opensearch~~
-7. failure handling during message producing/consuming.
-   1. in case we read an entry from jsonl and face issue during parsing or pushing to kafka, we could write that
-   record to some other jsonl file (stream-error.jsonl)
-   2. similarly, if we face any error while consuming event , we could send it to some retry topic. We could also
-   try if possible to add retry logic and backoff factor while consuming messages.
-8. ~~do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
-in kafka or multiple topics for each type on konnect entity.~~
-9. which fields to be indexed in open search schema ? Right now we are utilizing OS default mappings to make fields
-searchable, but we can explicitly change those mappings by defining some schema for OS index.
-10. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
-11. logging in app, comments in code
-12. any monitoring to see lags or any other metric ?
-13. add unit test cases too.
-14. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
-map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
-map. Ideally this map data could be in some distributed key,value db like Redis.
-15. we could use spring consumer which can have auto retry with backoff
-16. multiple kafka topics are used for different schemas to support compatibility level "BACKWARD". We could use single 
-topic by setting it as NONE too but that defeats purpose of avro schema and making schema changes backward compatible. 
-One producer sending data to 3 topics. One consumer listening to data from those 3 topics.
-to events from 3 topics. Schemas are varying and have less common fields so we did not create one unified schema. 
-17. Add steps to run the app e2e (producer, consumer and also curl for compatibility none) and curls for other things like open search
+1. We could produce messages to kafka in batch instead one by one
+2. Docker compose updates to run producer and consumer.
+3. Which fields to be kept searchable in open search schema ? Right now we are utilizing opensearch default mappings 
+to make fields searchable, but we can explicitly change those mappings by defining some schema for opensearch index.
+4. Add unit test cases too.
+5. At consumer side, we have a map to store (entity id, updated_at of last event processed) which is used to handle 
+out of order updates. Ideally this map data could be in some distributed key,value db like Redis.
+6. We could use spring consumer which can have auto retry with backoff.
+7. Multiple kafka topics are used for different konnect entities to support compatibility level "BACKWARD". We could 
+use single topic by setting it as NONE too but that defeats purpose of avro schema which helps in validating schema for
+backward compatibility. Schemas of different konnect entities are varying and have less common fields so we did not 
+create one unified schema.
 
 
 # Understanding sample events schema and pattern
@@ -65,13 +48,13 @@ curl --location 'localhost:9200/cdc/_search?pretty=null&size=100' \
 ```
 
 ```
-curl --location --request GET 'http://localhost:9200/cdc/_search' \
+curl --location --request GET 'http://localhost:9200/cdc/_search?pretty=null&size=100' \
 --header 'Content-Type: application/json' \
 --data '{
   "query": {
     "wildcard": {
-      "object.name": {
-        "value": "*namespace*"
+      "host": {
+        "value": "*cypress*"
       }
     }
   }
@@ -80,17 +63,23 @@ curl --location --request GET 'http://localhost:9200/cdc/_search' \
 
 
 ```
-curl --location --request GET 'http://localhost:9200/cdc/_search' \
+curl --location --request GET 'http://localhost:9200/cdc/_search?pretty=null&size=100' \
 --header 'Content-Type: application/json' \
 --data '{
   "query": {
     "match": {
-      "object.name": {
-        "query": "gateway",
+      "konnect_entity": {
+        "query": "node",
         "fuzziness": "AUTO"  
       }
     }
   }
 }'
+```
 
 ```
+curl --location --request DELETE 'localhost:9200/cdc' \
+--header 'Content-Type: application/json'
+```
+
+
