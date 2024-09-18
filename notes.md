@@ -25,7 +25,7 @@ in kafka or multiple topics for each type on konnect entity.
 15. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
 map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
 map
-16. Add steps to run the producer, consumer and also curl for compatibility none
+16. Add steps to run the app e2e (producer, consumer and also curl for compatibility none) and curls for other things like open search
 
 
 # Understanding sample events schema and pattern
