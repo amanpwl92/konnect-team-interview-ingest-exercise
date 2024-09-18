@@ -6,7 +6,7 @@
 4. ~~see if we can use avro for serialization/deserialization~~
 5. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
 konnect objects from stream.jsonl ?
-6. create object from defined schema using kafka event at consumer side to be pushed to opensearch
+6. ~~create object from defined schema using kafka event at consumer side to be pushed to opensearch~~
 7. failure handling during message producing/consuming.
    1. in case we read an entry from jsonl and face issue during parsing or pushing to kafka, we could write that
    record to some other jsonl file (stream-error.jsonl)
@@ -14,14 +14,15 @@ konnect objects from stream.jsonl ?
    try if possible to add retry logic and backoff factor while consuming messages.
 8. ~~do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
 in kafka or multiple topics for each type on konnect entity.~~
-9. which fields to be indexed in open search schema ?
+9. which fields to be indexed in open search schema ? Right now we are utilizing OS default mappings to make fields
+searchable, but we can explicitly change those mappings by defining some schema for OS index.
 10. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
 11. logging in app, comments in code
 12. any monitoring to see lags or any other metric ?
 13. add unit test cases too.
 14. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
 map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
-map
+map. Ideally this map data could be in some distributed key,value db like Redis.
 15. we could use spring consumer which can have auto retry with backoff
 16. multiple kafka topics are used for different schemas to support compatibility level "BACKWARD". We could use single 
 topic by setting it as NONE too but that defeats purpose of avro schema and making schema changes backward compatible. 
