@@ -2,6 +2,7 @@ package org.konnect;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -18,6 +19,8 @@ import java.util.concurrent.Future;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IngestExerciseProducer {
+  private static ObjectMapper mapper;
+  private static KafkaUtils kafkaUtils;
 
   public static Properties loadProperties(String fileName) throws IOException {
     final Properties envProps = new Properties();
@@ -43,6 +46,17 @@ public class IngestExerciseProducer {
     });
   }
 
+  private static void createProducerObjectMapper() {
+      mapper = new ObjectMapper();
+      mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+      mapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);
+      mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+  }
+
+  private static void createProducerKafkaUtils(Properties props) {
+    kafkaUtils = new KafkaUtils(props);
+  }
+
   public static void main(String[] args) throws Exception {
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
 
@@ -50,42 +64,20 @@ public class IngestExerciseProducer {
     String errorFilePath = "./stream" +
         new Date() +
         ".jsonl";
+    createProducerObjectMapper();
+    createProducerKafkaUtils(props);
 
-    KafkaUtils kafkaUtils = null;
     try {
       String line;
       BufferedReader reader = new BufferedReader(new FileReader(filePath));
-      kafkaUtils = new KafkaUtils(props);
       while ((line = reader.readLine()) != null) {
         try {
-          ObjectMapper mapper = new ObjectMapper();
-          mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-          mapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);
-          mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
           Map eventData = mapper.readValue(line, Map.class);
           String eventKey = ((LinkedHashMap) eventData.get("after")).get("key").toString();
           String eventValue = mapper.writeValueAsString(((LinkedHashMap) ((LinkedHashMap)
               eventData.get("after")).get("value")).get("object"));
-          String eventType = extractEventType(eventKey);
-          ServiceEvent serviceEvent; RouteEvent routeEvent; NodeEvent nodeEvent;
+          produceCdcEvents(eventKey, eventValue);
 
-          switch (eventType) {
-            case "service" -> {
-              serviceEvent = mapper.readValue(eventValue, ServiceEvent.class);
-              serviceEvent.setKonnectEntity(eventType);
-              kafkaUtils.produceEvent(eventType + ":" + serviceEvent.getId(), serviceEvent, false);
-            }
-            case "node" -> {
-              nodeEvent = mapper.readValue(eventValue, NodeEvent.class);
-              nodeEvent.setKonnectEntity(eventType);
-              kafkaUtils.produceEvent(eventType + ":" + nodeEvent.getId(), nodeEvent, false);
-            }
-            case "route" -> {
-              routeEvent = mapper.readValue(eventValue, RouteEvent.class);
-              routeEvent.setKonnectEntity(eventType);
-              kafkaUtils.produceEvent(eventType + ":" + routeEvent.getId(), routeEvent, false);
-            }
-          }
         } catch (Exception ex) {
           System.err.printf("Some error occurred while processing line - %s %n", line);
           saveLineToErrorFile(line, errorFilePath);
@@ -96,6 +88,29 @@ public class IngestExerciseProducer {
       System.err.printf("Error reading file %s due to %s %n", filePath, e);
     } finally {
       kafkaUtils.shutdown();
+    }
+  }
+
+  private static void produceCdcEvents(String eventKey, String eventValue) throws JsonProcessingException {
+    String eventType = extractEventType(eventKey);
+    ServiceEvent serviceEvent; RouteEvent routeEvent; NodeEvent nodeEvent;
+
+    switch (eventType) {
+      case "service" -> {
+        serviceEvent = mapper.readValue(eventValue, ServiceEvent.class);
+        serviceEvent.setKonnectEntity(eventType);
+        kafkaUtils.produceEvent(eventType + ":" + serviceEvent.getId(), serviceEvent, false);
+      }
+      case "node" -> {
+        nodeEvent = mapper.readValue(eventValue, NodeEvent.class);
+        nodeEvent.setKonnectEntity(eventType);
+        kafkaUtils.produceEvent(eventType + ":" + nodeEvent.getId(), nodeEvent, false);
+      }
+      case "route" -> {
+        routeEvent = mapper.readValue(eventValue, RouteEvent.class);
+        routeEvent.setKonnectEntity(eventType);
+        kafkaUtils.produceEvent(eventType + ":" + routeEvent.getId(), routeEvent, false);
+      }
     }
   }
 
