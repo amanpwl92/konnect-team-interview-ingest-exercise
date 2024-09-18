@@ -1,33 +1,33 @@
 # Important Points
 
-1. data in opensearch should go basis konnect entity id and updates handling should also be there - DONE
-2. note -  we need to set schema compatibilty as none for schema registry as we are pushing varying schemas for same 
-topic. Can we have something in docker compose for this ?
-```curl -X PUT http://localhost:8081/config --header "Content-Type: application/vnd.schemaregistry.v1+json" --data '{"compatibility": "none"}'```
-3. should we produce messages in batch or one by one
-4. docker compose updates to run your programs as well - producer and consumer ?
-5. see if we can use avro for serialization/deserialization - DONE
-6. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
+1. ~~data in opensearch should go basis konnect entity id and updates handling should also be there~~
+2. should we produce messages in batch or one by one
+3. docker compose updates to run your programs as well - producer and consumer ?
+4. ~~see if we can use avro for serialization/deserialization~~
+5. could we use something like factory pattern (like we have in rm looker proc processor) to create different 
 konnect objects from stream.jsonl ?
-7. create object from defined schema using kafka event at consumer side to be pushed to opensearch
-8. failure handling during message producing/consuming.
+6. create object from defined schema using kafka event at consumer side to be pushed to opensearch
+7. failure handling during message producing/consuming.
    1. in case we read an entry from jsonl and face issue during parsing or pushing to kafka, we could write that
    record to some other jsonl file (stream-error.jsonl)
    2. similarly, if we face any error while consuming event , we could send it to some retry topic. We could also
    try if possible to add retry logic and backoff factor while consuming messages.
-9. do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
-in kafka or multiple topics for each type on konnect entity.
-10. which fields to be indexed in open search schema ?
-11. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
-12. logging in app, comments in code
-13. any monitoring to see lags or any other metric ?
-14. add unit test cases too.
-15. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
+8. ~~do we need multiple indexes in open search or a unified index like we have data in file? Similarly, single topic
+in kafka or multiple topics for each type on konnect entity.~~
+9. which fields to be indexed in open search schema ?
+10. do we need to parse CDC stream key to derive something? Do we need to support event ordering here ?
+11. logging in app, comments in code
+12. any monitoring to see lags or any other metric ?
+13. add unit test cases too.
+14. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
 map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
 map
-16. we could use spring consumer which can have auto retry with backoff
-17. right now single kafka topic is used for different schemas. Schemas are varying and have less common fields so we did not create one unified schema. We used one single topic as created using docker compose.
-18. Add steps to run the app e2e (producer, consumer and also curl for compatibility none) and curls for other things like open search
+15. we could use spring consumer which can have auto retry with backoff
+16. multiple kafka topics are used for different schemas to support compatibility level "BACKWARD". We could use single 
+topic by setting it as NONE too but that defeats purpose of avro schema and making schema changes backward compatible. 
+One producer sending data to 3 topics. One consumer listening to data from those 3 topics.
+to events from 3 topics. Schemas are varying and have less common fields so we did not create one unified schema. 
+17. Add steps to run the app e2e (producer, consumer and also curl for compatibility none) and curls for other things like open search
 
 
 # Understanding sample events schema and pattern

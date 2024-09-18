@@ -5,6 +5,7 @@ import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.*;
+import org.konnect.enums.CdcTopics;
 import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;
@@ -15,13 +16,12 @@ public class IngestExerciseConsumer {
 
   public static void main(String[] args) throws Exception {
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
-    final String topic = "cdc-events";
 
     Consumer<String, Object> consumer = new KafkaConsumer<>(props);
     System.out.println("consumer started");
 
     try (consumer) {
-      consumer.subscribe(Collections.singletonList(topic));
+      consumer.subscribe(CdcTopics.getAllTopics());
       RestHighLevelClient openSearchClient = new RestHighLevelClient(
           RestClient.builder(new HttpHost("localhost", 9200, "http"))
       );

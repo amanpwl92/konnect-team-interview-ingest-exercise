@@ -12,6 +12,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.konnect.avro.NodeEvent;
 import org.konnect.avro.RouteEvent;
 import org.konnect.avro.ServiceEvent;
+import org.konnect.enums.CdcTopics;
 
 import java.io.*;
 import java.util.*;
@@ -24,21 +25,21 @@ public class IngestExerciseProducer {
   private final Producer<String, ServiceEvent> serviceEventProducer;
   private final Producer<String, NodeEvent> nodeEventProducer;
   private final Producer<String, RouteEvent> routeEventProducer;
-  final String outTopic;
+  final String serviceOutTopic = CdcTopics.CDC_SERVICE.toString();
+  final String routeOutTopic = CdcTopics.CDC_ROUTE.toString();
+  final String nodeOutTopic = CdcTopics.CDC_NODE.toString();
 
   public IngestExerciseProducer(final Producer<String, ServiceEvent> serviceEventProducer,
                                 final Producer<String, NodeEvent> nodeEventProducer,
-                                final Producer<String, RouteEvent> routeEventProducer,
-                                final String topic) {
+                                final Producer<String, RouteEvent> routeEventProducer) {
     this.serviceEventProducer = serviceEventProducer;
     this.nodeEventProducer = nodeEventProducer;
     this.routeEventProducer = routeEventProducer;
-    outTopic = topic;
   }
 
   public void produceServiceEvent(String key, ServiceEvent event) {
     try {
-      final ProducerRecord<String, ServiceEvent> producerRecord = new ProducerRecord<>(outTopic, key, event);
+      final ProducerRecord<String, ServiceEvent> producerRecord = new ProducerRecord<>(serviceOutTopic, key, event);
       serviceEventProducer.send(producerRecord);
     } catch (Exception ex) {
       System.out.println(ex);
@@ -47,7 +48,7 @@ public class IngestExerciseProducer {
 
   public void produceNodeEvent(String key, NodeEvent event) {
     try {
-      final ProducerRecord<String, NodeEvent> producerRecord = new ProducerRecord<>(outTopic, key, event);
+      final ProducerRecord<String, NodeEvent> producerRecord = new ProducerRecord<>(nodeOutTopic, key, event);
       nodeEventProducer.send(producerRecord);
     } catch (Exception ex) {
       System.out.println(ex);
@@ -56,7 +57,7 @@ public class IngestExerciseProducer {
 
   public void produceRouteEvent(String key, RouteEvent event) {
     try {
-      final ProducerRecord<String, RouteEvent> producerRecord = new ProducerRecord<>(outTopic, key, event);
+      final ProducerRecord<String, RouteEvent> producerRecord = new ProducerRecord<>(routeOutTopic, key, event);
       routeEventProducer.send(producerRecord);
     } catch (Exception ex) {
       System.out.println(ex);
@@ -95,12 +96,11 @@ public class IngestExerciseProducer {
 
   public static void main(String[] args) throws Exception {
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
-    final String topic = "cdc-events";
     final Producer<String, ServiceEvent> serviceEventProducer = new KafkaProducer<>(props);
     final Producer<String, RouteEvent> routeEventProducer = new KafkaProducer<>(props);
     final Producer<String, NodeEvent> nodeEventProducer = new KafkaProducer<>(props);
     final IngestExerciseProducer producerApp = new IngestExerciseProducer(serviceEventProducer, nodeEventProducer,
-        routeEventProducer, topic);
+        routeEventProducer);
 
     String filePath = "./stream.jsonl";
     try {
