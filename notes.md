@@ -24,8 +24,10 @@ in kafka or multiple topics for each type on konnect entity.
 15. any monitoring to see lags or any other metric ?
 16. add unit test cases too.
 17. at consumer side, we can maintain some data in map to store (entity id, updated_at of last event processed). This
-map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from
-map
+map can help to fix out of order updated handling. We process only if updated_at of event > updated_at of event id from map
+18. we could use spring consumer which can have auto retry with backoff
+19. right now single kafka topic is used for different schemas. Schemas are varying and have less common fields so we did not create one unified schema. We used one single topic as created using docker compose.
+
 
 
 # Understanding sample events schema and pattern
