@@ -47,6 +47,10 @@ public class IngestExerciseProducer {
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
 
     String filePath = "./stream.jsonl";
+    String errorFilePath = "./stream" +
+        new Date() +
+        ".jsonl";
+
     KafkaUtils kafkaUtils = null;
     try {
       String line;
@@ -64,7 +68,6 @@ public class IngestExerciseProducer {
               eventData.get("after")).get("value")).get("object"));
           String eventType = extractEventType(eventKey);
           ServiceEvent serviceEvent; RouteEvent routeEvent; NodeEvent nodeEvent;
-
 
           switch (eventType) {
             case "service" -> {
@@ -84,8 +87,8 @@ public class IngestExerciseProducer {
             }
           }
         } catch (Exception ex) {
-          System.err.printf("Some error occurred while processing line - %s", line);
-          saveLineToErrorFile(line);
+          System.err.printf("Some error occurred while processing line - %s %n", line);
+          saveLineToErrorFile(line, errorFilePath);
         }
       }
 
@@ -106,12 +109,8 @@ public class IngestExerciseProducer {
     throw new RuntimeException("Could not extract event type from key: " + key);
   }
 
-  private static void saveLineToErrorFile(String line) throws IOException {
-    String filePath = "./stream" +
-        new Date() +
-        ".jsonl";
-
-    BufferedWriter writer = new BufferedWriter((new FileWriter(filePath)));
+  private static void saveLineToErrorFile(String line, String errorFilePath) throws IOException {
+    BufferedWriter writer = new BufferedWriter((new FileWriter(errorFilePath, true)));
     writer.write(line);
     writer.newLine();
     writer.close();
