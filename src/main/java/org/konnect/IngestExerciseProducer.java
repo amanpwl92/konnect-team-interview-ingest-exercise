@@ -46,14 +46,14 @@ public class IngestExerciseProducer {
     });
   }
 
-  private static void createProducerObjectMapper() {
+  private static void createObjectMapper() {
       mapper = new ObjectMapper();
       mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
       mapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);
       mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
   }
 
-  private static void createProducerKafkaUtils(Properties props) {
+  private static void createKafkaUtils(Properties props) {
     kafkaUtils = new KafkaUtils(props);
   }
 
@@ -64,8 +64,8 @@ public class IngestExerciseProducer {
     String errorFilePath = "./stream" +
         new Date() +
         ".jsonl";
-    createProducerObjectMapper();
-    createProducerKafkaUtils(props);
+    createObjectMapper();
+    createKafkaUtils(props);
 
     try {
       String line;

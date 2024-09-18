@@ -54,6 +54,8 @@ public class KafkaUtils {
   }
 
   public void shutdown() {
-
+    serviceEventProducer.close();
+    nodeEventProducer.close();
+    routeEventProducer.close();
   }
 }
