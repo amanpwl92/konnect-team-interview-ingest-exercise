@@ -11,6 +11,8 @@ import org.konnect.avro.NodeEvent;
 import org.konnect.avro.RouteEvent;
 import org.konnect.avro.ServiceEvent;
 import org.konnect.utils.KafkaUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
@@ -19,6 +21,8 @@ import java.util.concurrent.Future;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IngestExerciseProducer {
+
+  private static final Logger logger = LoggerFactory.getLogger(IngestExerciseProducer.class);
   private static ObjectMapper mapper;
   private static KafkaUtils kafkaUtils;
 
@@ -58,58 +62,72 @@ public class IngestExerciseProducer {
   }
 
   public static void main(String[] args) throws Exception {
+    logger.info("Producer started");
     final Properties props = IngestExerciseProducer.loadProperties("configuration/dev.properties");
-
     String filePath = "./stream.jsonl";
-    String errorFilePath = "./stream" +
-        new Date() +
+    String errorFilePath = "./stream-error-" +
+        new Date().getTime() +
         ".jsonl";
+    logger.info("Error file path is {}", errorFilePath);
+    logger.info("Producer setup for object mapper, kafka utils.");
     createObjectMapper();
     createKafkaUtils(props);
+    logger.info("Producer setup for object mapper, kafka utils done.");
 
     try {
       String line;
       BufferedReader reader = new BufferedReader(new FileReader(filePath));
       while ((line = reader.readLine()) != null) {
         try {
+          logger.info("Reading line {} from file.", line);
           Map eventData = mapper.readValue(line, Map.class);
           String eventKey = ((LinkedHashMap) eventData.get("after")).get("key").toString();
           String eventValue = mapper.writeValueAsString(((LinkedHashMap) ((LinkedHashMap)
               eventData.get("after")).get("value")).get("object"));
+          logger.info("Sending cdc event to kafka.");
           produceCdcEvents(eventKey, eventValue);
 
         } catch (Exception ex) {
-          System.err.printf("Some error occurred while processing line - %s %n", line);
+          logger.info("Some error occurred while processing line - {}. Error details - {}. Saving line to" +
+              "error file.", line, ex);
           saveLineToErrorFile(line, errorFilePath);
         }
       }
 
     } catch (IOException e) {
-      System.err.printf("Error reading file %s due to %s %n", filePath, e);
+      logger.error("Error reading file {} due to {}", filePath, e);
     } finally {
+      logger.info("Shutting down resources.");
       kafkaUtils.shutdown();
     }
   }
 
   private static void produceCdcEvents(String eventKey, String eventValue) throws JsonProcessingException {
+    logger.info("In method produceCdcEvents, with event key {} and event value {}.", eventKey, eventValue);
     String eventType = extractEventType(eventKey);
     ServiceEvent serviceEvent; RouteEvent routeEvent; NodeEvent nodeEvent;
 
     switch (eventType) {
       case "service" -> {
+        logger.info("Got cdc event for service entity.");
         serviceEvent = mapper.readValue(eventValue, ServiceEvent.class);
         serviceEvent.setKonnectEntity(eventType);
         kafkaUtils.produceEvent(eventType + ":" + serviceEvent.getId(), serviceEvent, false);
+        logger.info("Cdc event for service entity sent to kafka successfully.");
       }
       case "node" -> {
+        logger.info("Got cdc event for node entity.");
         nodeEvent = mapper.readValue(eventValue, NodeEvent.class);
         nodeEvent.setKonnectEntity(eventType);
         kafkaUtils.produceEvent(eventType + ":" + nodeEvent.getId(), nodeEvent, false);
+        logger.info("Cdc event for node entity sent to kafka successfully.");
       }
       case "route" -> {
+        logger.info("Got cdc event for route entity.");
         routeEvent = mapper.readValue(eventValue, RouteEvent.class);
         routeEvent.setKonnectEntity(eventType);
         kafkaUtils.produceEvent(eventType + ":" + routeEvent.getId(), routeEvent, false);
+        logger.info("Cdc event for route entity sent to kafka successfully.");
       }
     }
   }
@@ -121,14 +139,17 @@ public class IngestExerciseProducer {
       String[] eventParts = parts[1].split("/");
       return eventParts[0]; // node, route, service
     }
+    logger.error("Could not extract event type from key {}.", key);
     throw new RuntimeException("Could not extract event type from key: " + key);
   }
 
   private static void saveLineToErrorFile(String line, String errorFilePath) throws IOException {
+    logger.info("In method saveLineToErrorFile, saving line {} to file {}", line, errorFilePath);
     BufferedWriter writer = new BufferedWriter((new FileWriter(errorFilePath, true)));
     writer.write(line);
     writer.newLine();
     writer.close();
+    logger.info("Line saved to error file.");
   }
 
 }
