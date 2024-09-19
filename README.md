@@ -92,6 +92,8 @@ to tear down all the services.
 Note - it could be either "docker-compose" or "docker compose" depending on the docker version you are using. Old 
 docker versions needs docker-compose separately whereas with new versions, docker compose is integrated with docker.
 
+Also multiple kafka topics are used for different konnect entities since different entities have different schema.
+
 ```
 docker compose up -d
 
@@ -157,10 +159,6 @@ curl --location --request DELETE 'localhost:9200/cdc' \
 5. At consumer side, we have a map to store (entity id, updated_at of last event processed) which is used to handle
    out of order updates. Ideally this map data could be in some distributed key,value db like Redis.
 6. We could use spring consumer which can have auto retry with backoff.
-7. Multiple kafka topics are used for different konnect entities to support compatibility level "BACKWARD". We could
-   use single topic by setting it as NONE too but that defeats purpose of avro schema which helps in validating schema for
-   backward compatibility. Schemas of different konnect entities are varying and have less common fields so we did not
-   create one unified schema.
 
 
 ## Understanding sample events schema and pattern
